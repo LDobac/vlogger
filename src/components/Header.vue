@@ -1,6 +1,6 @@
 <template>
-    <div class="home">
-        <p>Hello, World!</p>
+    <div>
+
     </div>
 </template>
 
@@ -8,6 +8,14 @@
 import { defineComponent } from "vue"
 
 export default defineComponent({
-    name: "Home",
+    name : "Header",
+    setup() {
+        // 
+    },
 })
 </script>
+
+
+<style>
+
+</style>
