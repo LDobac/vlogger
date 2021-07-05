@@ -15,7 +15,7 @@ module.exports = {
         "no-console": process.env.NODE_ENV === "production" ? "warn" : "off",
         "no-debugger": process.env.NODE_ENV === "production" ? "warn" : "off",
         "quotes" : ["error", "double"],
-        "semi" : ["error", "never"],
+        "semi" : ["error", "always"],
         "indent": ["warn", 4]
     },
     overrides: [
