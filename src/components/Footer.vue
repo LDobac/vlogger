@@ -1,19 +1,19 @@
 <template>
-    <div class="home">
-        <p>Hello, World!</p>
-    </div>
+    <footer class="footer">
+        Hello, This is footer!
+    </footer>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
 
 export default defineComponent({
-    name: "Home",
+    name: "Footer",
 });
 </script>
 
 <style lang="scss" scoped>
-.home {
-    grid-area: main;
+.footer {
+    grid-area: footer;
 }
 </style>
