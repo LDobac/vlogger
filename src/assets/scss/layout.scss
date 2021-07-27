@@ -1,0 +1,31 @@
+@import "./variables";
+
+@mixin m-xl {
+    @media screen and (min-width: $breakpoint-lg) and ( max-width: $breakpoint-xl ) {
+        @content;
+    }
+}
+
+@mixin m-lg {
+    @media screen and (min-width: $breakpoint-md) and ( max-width: $breakpoint-lg ) {
+        @content;
+    }
+}
+
+@mixin m-md {
+    @media screen and (min-width: $breakpoint-sm) and ( max-width: $breakpoint-md ) {
+        @content;
+    }
+}
+
+@mixin m-sm {
+    @media screen and ( max-width: $breakpoint-sm ) {
+        @content;
+    }
+}
+
+.card {
+    background-color: var(--bg-color);
+    border-radius: 12px;
+    padding: 2rem;
+}
