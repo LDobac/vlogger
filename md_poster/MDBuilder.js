@@ -1,4 +1,7 @@
 const marked = require("marked");
+const moment = require("moment");
+const YAML = require("yaml");
+const { MDNoMetadata } = require("./MDExceptions");
 
 /**
  * @class MDPostData
@@ -51,6 +54,7 @@ class MDBuilder
      * @public
      * @param {String|null} [mdContent] - Markdown document for parsing
      * @returns {MDPostData}
+     * @throws
      */
     Parse(mdContent = null)
     {
@@ -64,7 +68,31 @@ class MDBuilder
         const tokens = marked.lexer(this.mdContent);
         const renderedHTML = marked.parser(tokens);
 
+        const metadataTokens = tokens.filter((token) => {
+            if (token.type == "post_metadata")
+            {
+                return true;
+            }
+        });
+
+        if (!metadataTokens.length)
+        {
+            throw new MDNoMetadata("No metadata in markdown document.");
+        }
+
+        const rawMetadata = metadataTokens[0].text;
+        const parsedMetadata = YAML.parse(rawMetadata);
+
+        if (!parsedMetadata.title)
+        {
+            throw new MDNoMetadata("Failed to find title metadata");
+        }
+
+        postData.title = parsedMetadata.title;
         postData.content = renderedHTML;
+        postData.date = moment(parsedMetadata.date).toISOString(true) ?? moment().toISOString(true);
+        postData.seriesName = parsedMetadata.series ?? "";
+        postData.tags = parsedMetadata.tags ?? [];
 
         return postData;
     }
@@ -80,12 +108,12 @@ class MDBuilder
             name : "post_metadata",
             level : "block",
             start(src) {
-                const match = src.match(/(^-{3}[:-{3}\n])(.*)(-{3}[:-{3}\n])/s);
+                const match = src.match(/(^-{3}[:-{3}\n])(.*)(-{3}[:-{3}\n]?)/s);
                 
                 return match?.index;
             },
             tokenizer(src, tokens) {
-                const rule = /(^-{3}[:-{3}\n])(.*)(-{3}[:-{3}\n])/s;
+                const rule = /(^-{3}[:-{3}\n])(.*)(-{3}[:-{3}\n]?)/s;
                 const match = rule.exec(src);
 
                 if (match)
