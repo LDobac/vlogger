@@ -6,7 +6,6 @@ const { MDNoMetadata } = require("./MDExceptions");
 /**
  * @class MDPostData
  * @type {Object}
- * @property {String} uid
  * @property {String} title
  * @property {String} content
  * @property {String} date
@@ -17,7 +16,6 @@ class MDPostData
 {
     constructor()
     {
-        this.uid = "";
         this.title = "";
         this.content = "";
         this.date = "";
