@@ -4,7 +4,10 @@ node_modules
 
 /tests/e2e/videos/
 /tests/e2e/screenshots/
+/tests/unit/*_mock
 
+!/tests/unit/mdposter_mock
+/tests/unit/mdposter_mock/.build
 
 # local env files
 .env.local
