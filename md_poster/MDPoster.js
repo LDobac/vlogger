@@ -60,19 +60,26 @@ class MDPoster
 
         for (const [index, markdownFile] of changedMDList.entries())
         {
-            const rawMarkdown = await fs.readFile(path.resolve(this.savedDir, markdownFile.name), {
-                encoding : "utf8"
-            });
-
-            const mdPostData = this.mdBuilder.Parse(rawMarkdown);
-
-            if (markdownFile.exists)
+            if (markdownFile.deleted)
             {
-                this.ModifyPostsMetadata(markdownFile.mtime, markdownFile.postUid, mdPostData);
+                await this.DeletePostsMetadata(markdownFile.postUid);
             }
             else
             {
-                await this.AppendPostsMetadata(markdownFile.name, mdPostData);
+                const rawMarkdown = await fs.readFile(path.resolve(this.savedDir, markdownFile.name), {
+                    encoding : "utf8"
+                });
+    
+                const mdPostData = this.mdBuilder.Parse(rawMarkdown);
+
+                if (markdownFile.exists)
+                {
+                    this.ModifyPostsMetadata(markdownFile.mtime, markdownFile.postUid, mdPostData);
+                }
+                else
+                {
+                    await this.AppendPostsMetadata(markdownFile.name, mdPostData);
+                }
             }
         }
 
@@ -202,39 +209,52 @@ class MDPoster
         ];
 
         const markdownFileList = [];
+
+        // Find new or changed files
         for (const file of fileList)
         {
             if (!file.isFile()) continue;
 
             const ext = path.extname(file.name);
+            if (!mdFormatExt.includes(ext)) continue;
 
-            if (mdFormatExt.includes(ext))
+            const postMeta = this.postsMeta.find(meta => meta.originFile === file.name);
+
+            if (postMeta)
             {
-                const postMeta = this.postsMeta.find(meta => meta.originFile === file.name);
+                const fileStat = await fs.stat(path.resolve(this.savedDir, file.name));
 
-                if (postMeta)
-                {
-                    const fileStat = await fs.stat(path.resolve(this.savedDir, file.name));
-
-                    if (postMeta.mtime !== fileStat.mtimeMs)
-                    {
-                        markdownFileList.push({
-                            name : file.name,
-                            exists : true,
-                            postUid : postMeta.uid,
-                            mtime : fileStat.mtimeMs
-                        });
-                    }
-                }
-                else
+                if (postMeta.mtime !== fileStat.mtimeMs)
                 {
                     markdownFileList.push({
                         name : file.name,
-                        exists : false,
+                        exists : true,
+                        postUid : postMeta.uid,
+                        mtime : fileStat.mtimeMs
                     });
                 }
             }
+            else
+            {
+                markdownFileList.push({
+                    name : file.name,
+                    exists : false,
+                });
+            }
         }
+
+        // Find deleted files
+        const deletedPostMetas = this.postsMeta.filter((e) => {
+            return !fileList.some(f => f.name === e.originFile);
+        });
+
+        deletedPostMetas.forEach((meta) => {
+            markdownFileList.push({
+                exists : false,
+                deleted : true,
+                postUid : meta.uid,
+            });
+        });
 
         return markdownFileList;
     }
@@ -317,10 +337,11 @@ class MDPoster
     async AppendPostsMetadata(originFile, mdPostData)
     {
         const newPostId = this.GetLastPostId(this.postsMeta) + 1;
-        const htmlFile = path.resolve(
+        const htmlFileName = replaceExt(originFile, ".html"); 
+        const htmlFilePathAbs = path.resolve(
                             this.buildDir, 
                             MDPoster.POST_BUILD_DIR_NAME,
-                            replaceExt(originFile, ".html")
+                            htmlFileName
                         );
 
         let seriesId = null;
@@ -344,7 +365,7 @@ class MDPoster
         const fileStat = await fs.stat(path.resolve(this.savedDir, originFile));
 
         await fs.writeFile(
-                htmlFile,
+                htmlFilePathAbs,
                 mdPostData.content, 
                 {
                     "encoding" : "utf8",
@@ -357,7 +378,8 @@ class MDPoster
             series : seriesId,
             tags : tagIds,
             originFile : originFile,
-            htmlFile : htmlFile,
+            htmlFileName : htmlFileName,
+            htmlFilePath : htmlFilePathAbs,
             mtime : fileStat.mtimeMs,
         });
     }
@@ -387,7 +409,7 @@ class MDPoster
             if (curPostMeta.series)
             {
                 // remove post id from previous series meta
-                const seriesPosts = this.seriesMeta[curPostMeta.series].posts;
+                const seriesPosts = this.seriesMeta[curPostMeta.series.toString()].posts;
 
                 const removeIndex = seriesPosts.findIndex(post => post === curPostMeta.uid);
                 seriesPosts.splice(removeIndex, 1);
@@ -411,18 +433,19 @@ class MDPoster
             return tagId;
         });
 
-        Set.prototype.difference = function(setB) {
-            var difference = new Set(this);
-            for (var elem of setB) {
-                difference.delete(elem);
-            }
-            return difference;
-        };
+        // Set.prototype.difference = function(setB) {
+        //     var difference = new Set(this);
+        //     for (var elem of setB) {
+        //         difference.delete(elem);
+        //     }
+        //     return difference;
+        // };
 
-        const nowTagSet = new Set(nowTagIds);
-        const curPostSet = new Set(curPostMeta.tags);
+        // const nowTagSet = new Set(nowTagIds);
+        // const curPostSet = new Set(curPostMeta.tags);
 
-        const deletedTags = curPostSet.difference(nowTagSet);
+        // const deletedTags = curPostSet.difference(nowTagSet);
+        const deletedTags = curPostMeta.tags.filter(e => !nowTagIds.includes(e));
         for (const deletedTagId of deletedTags)
         {
             const tagPosts = this.tagsMeta[deletedTagId.toString()].posts;
@@ -433,7 +456,8 @@ class MDPoster
             this.tagsMeta[deletedTagId.toString()].posts = tagPosts;
         }
 
-        const addedTags = nowTagSet.difference(curPostSet);
+        // const addedTags = nowTagSet.difference(curPostSet);
+        const addedTags = nowTagIds.filter(e => curPostMeta.tags.includes(e));
         for (const addedTagId of addedTags)
         {
             this.tagsMeta[addedTagId.toString()].posts.push(curPostMeta.uid);
@@ -447,6 +471,38 @@ class MDPoster
         curPostMeta.title = mdPostData.title;
         curPostMeta.date = mdPostData.date;
         curPostMeta.mtime = mtime;
+    }
+
+    async DeletePostsMetadata(postUid)
+    {
+        const curPostMetaIndex = this.postsMeta.findIndex(meta => meta.uid === postUid);
+        const curPostMeta = this.postsMeta[curPostMetaIndex];
+
+        await fs.unlink(curPostMeta.htmlFilePath);
+        
+        // Remove series
+        if (curPostMeta.series)
+        {
+            const seriesPosts = this.seriesMeta[curPostMeta.series.toString()].posts;
+
+            const removeIndex = seriesPosts.findIndex(post => post === curPostMeta.uid);
+            seriesPosts.splice(removeIndex, 1);
+
+            this.seriesMeta[curPostMeta.series.toString()].posts = seriesPosts;
+        }
+
+        // Remove tags
+        for (const deletedTagId of curPostMeta.tags)
+        {
+            const tagPosts = this.tagsMeta[deletedTagId.toString()].posts;
+
+            const removeIndex = tagPosts.findIndex(post => post === curPostMeta.uid);
+            tagPosts.splice(removeIndex, 1);
+
+            this.tagsMeta[deletedTagId.toString()].posts = tagPosts;
+        }
+
+        this.postsMeta.splice(curPostMetaIndex, 1);
     }
 
     /**
