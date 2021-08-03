@@ -9,6 +9,15 @@ node_modules
 !/tests/unit/mdposter_mock
 /tests/unit/mdposter_mock/.build
 
+!/_posts
+/_posts/.build
+
+/src/assets/.build
+
+/public
+!/public/favicon.ico
+!/public/index.html
+
 # local env files
 .env.local
 .env.*.local
