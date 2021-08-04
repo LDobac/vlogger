@@ -23,6 +23,8 @@ interface PostMetadata
 {
     uid : number;
     title : string;
+    thumbnail : string;
+    summery : string;
     date : Date;
     series : number;
     tags : number[];

@@ -1,21 +1,22 @@
 <template>
     <main class="home">
-        <article class="card">
-        </article>
+        <post-list />
     </main>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import PostList from "@/components/home/PostList.vue";
 
 export default defineComponent({
     name: "Home",
+    components : {
+        PostList
+    },
 });
 </script>
 
 <style lang="scss" scoped>
-@import "@/assets/scss/layout.scss";
-
 .home {
     grid-area: main;
     width: 100%;

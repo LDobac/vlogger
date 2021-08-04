@@ -13,12 +13,12 @@ export default class PostLoader
         this.tagsMetadata = require("@/assets/.build/tags.json");
     }
 
-    public GetRecentPosts(count = 10, offset = 0)
+    public GetRecentPosts(count = 10, offset = 0) : PostMetadata[]
     {
         return this.postMetadatas.slice(offset, count);
     }
 
-    public GetPostContent(postMeta : PostMetadata)
+    public GetPostContent(postMeta : PostMetadata) : string
     {
         const fileName = postMeta.htmlFileName;
 
