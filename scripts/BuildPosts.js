@@ -1,6 +1,7 @@
 const fs = require("fs/promises");
 const fse = require("fs-extra");
 const path = require("path");
+const process = require("process");
 const replaceExt = require("replace-ext");
 const { MDPoster } = require("../md_poster/MDPoster");
 
@@ -11,11 +12,22 @@ const mdPoster = new MDPoster(POSTS_DIRECTORY_PATH);
 
 async function Run()
 {
+    const args = process.argv.slice(2);
+    
+    let fresh = false;
+
+    fresh = args.some(arg => arg == "--fresh");
+
+    if (fresh)
+    {
+        console.log("Posterization to fresh");
+    }
+
     try 
     {
         console.log("Start posterization");
 
-        await mdPoster.Posterization();
+        await mdPoster.Posterization(fresh);
         
         console.log("Done posterization");
     } 

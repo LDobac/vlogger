@@ -16,7 +16,7 @@ class MDPoster
     static POSTS_METADATA_FILE = "post.json";
     static SERIES_METADATA_FILE = "series.json";
     static TAGS_METADATA_FILE = "tags.json";
-
+    
     /**
      * @param {String} savedDirectory - save directory with markdown documents. 
      */
@@ -374,6 +374,8 @@ class MDPoster
         this.postsMeta.push({
             uid : newPostId,
             title : mdPostData.title,
+            summery : mdPostData.summery,
+            thumbnail : mdPostData.thumbnail,
             date : mdPostData.date,
             series : seriesId,
             tags : tagIds,
@@ -433,18 +435,6 @@ class MDPoster
             return tagId;
         });
 
-        // Set.prototype.difference = function(setB) {
-        //     var difference = new Set(this);
-        //     for (var elem of setB) {
-        //         difference.delete(elem);
-        //     }
-        //     return difference;
-        // };
-
-        // const nowTagSet = new Set(nowTagIds);
-        // const curPostSet = new Set(curPostMeta.tags);
-
-        // const deletedTags = curPostSet.difference(nowTagSet);
         const deletedTags = curPostMeta.tags.filter(e => !nowTagIds.includes(e));
         for (const deletedTagId of deletedTags)
         {
@@ -456,7 +446,6 @@ class MDPoster
             this.tagsMeta[deletedTagId.toString()].posts = tagPosts;
         }
 
-        // const addedTags = nowTagSet.difference(curPostSet);
         const addedTags = nowTagIds.filter(e => curPostMeta.tags.includes(e));
         for (const addedTagId of addedTags)
         {
@@ -469,6 +458,9 @@ class MDPoster
 
         // Apply mtime
         curPostMeta.title = mdPostData.title;
+        curPostMeta.content = mdPostData.content;
+        curPostMeta.summery = mdPostData.summery;
+        curPostMeta.thumbnail = mdPostData.thumbnail;
         curPostMeta.date = mdPostData.date;
         curPostMeta.mtime = mtime;
     }

@@ -8,6 +8,8 @@ const { MDNoMetadata } = require("./MDExceptions");
  * @type {Object}
  * @property {String} title
  * @property {String} content
+ * @property {String} summery
+ * @property {String} thumbnail
  * @property {String} date
  * @property {String} seriesName
  * @property {String[]} tags
@@ -18,6 +20,8 @@ class MDPostData
     {
         this.title = "";
         this.content = "";
+        this.summery = "";
+        this.thumbnail = "";
         this.date = "";
         this.seriesName = "";
         this.tags = [];
@@ -88,6 +92,8 @@ class MDBuilder
 
         postData.title = parsedMetadata.title;
         postData.content = renderedHTML;
+        postData.summery = parsedMetadata.summery ?? "";
+        postData.thumbnail = parsedMetadata.thumbnail ?? "";
         postData.date = moment(parsedMetadata.date).toISOString(true) ?? moment().toISOString(true);
         postData.seriesName = parsedMetadata.series ?? "";
         postData.tags = parsedMetadata.tags ?? [];
