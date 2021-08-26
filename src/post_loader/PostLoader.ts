@@ -1,29 +1,52 @@
 import { PostMetadata, SeriesMetadata, TagsMetadata } from "./models";
+import Post from "./Post";
 
 export default class PostLoader 
 {
-    private postMetadatas : PostMetadata[];
-    private seriesMetadata : SeriesMetadata;
-    private tagsMetadata : TagsMetadata;
+    private _postMetadatas : PostMetadata[];
+    private _seriesMetadata : SeriesMetadata;
+    private _tagsMetadata : TagsMetadata;
 
     public constructor()
     {
-        this.postMetadatas = require("@/assets/.build/post.json");
-        this.seriesMetadata = require("@/assets/.build/series.json");
-        this.tagsMetadata = require("@/assets/.build/tags.json");
+        this._postMetadatas = require("@/assets/.build/post.json");
+        this._seriesMetadata = require("@/assets/.build/series.json");
+        this._tagsMetadata = require("@/assets/.build/tags.json");
     }
 
-    public GetRecentPosts(count = 10, offset = 0) : PostMetadata[]
+    public get postMetadatas() : PostMetadata[]
+    {
+        return this._postMetadatas;
+    }
+    
+    public get seriesMetadata() : SeriesMetadata
+    {
+        return this._seriesMetadata;
+    }
+    
+    public get tagsMetadata() : TagsMetadata
+    {
+        return this._tagsMetadata;
+    }
+
+    public GetRecentPostsMetadata(count = 10, offset = 0) : PostMetadata[]
     {
         return this.postMetadatas.slice(offset, count);
     }
 
-    public GetPostContent(postMeta : PostMetadata) : string
+    public GetPostById(id : number) : Post | null
     {
-        const fileName = postMeta.htmlFileName;
+        try
+        {
+            const post = new Post(id, this);
 
-        const htmlFile = require(`@/assets/.build/build_posts/${fileName}`);
+            return post;
+        } 
+        catch (error) 
+        {
+            console.log(error);
 
-        return htmlFile;
+            return null;
+        }
     }
 }

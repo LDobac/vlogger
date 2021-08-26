@@ -33,6 +33,8 @@ interface PostMetadata
 };
 
 export {
+    Series,
+    Tag,
     PostMetadata,
     SeriesMetadata,
     TagsMetadata,

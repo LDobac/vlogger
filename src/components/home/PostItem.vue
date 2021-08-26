@@ -1,6 +1,11 @@
 <template>
     <router-link 
-        to="#"
+        :to="{
+            name : 'PostView', 
+            params : {
+                id : post.uid
+            }
+        }"
     >
         <div class="post-item card">
             <div 

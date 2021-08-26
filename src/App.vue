@@ -1,19 +1,17 @@
 <template>
     <Header />
-    <LeftSideMenu />
     <router-view/>
     <Footer />
 </template>
 
 <script lang="ts">
-import { Header, Footer, LeftSideMenu } from "@/components/";
+import { Header, Footer } from "@/components/";
 import { defineComponent } from "vue";
 
 export default defineComponent({
     components : {
         Header,
         Footer,
-        LeftSideMenu,
     },
 });
 </script>

@@ -20,7 +20,7 @@ export default defineComponent({
         const app = getCurrentInstance();
         const postLoader = app?.appContext.config.globalProperties.$postLoader as PostLoader;
 
-        const posts = postLoader.GetRecentPosts(10, 0);
+        const posts = postLoader.GetRecentPostsMetadata(10, 0);
 
         return {
             posts

@@ -1,4 +1,5 @@
 <template>
+    <LeftSideMenu />
     <main class="home">
         <post-list />
     </main>
@@ -6,12 +7,14 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import { LeftSideMenu } from "@/components/";
 import PostList from "@/components/home/PostList.vue";
 
 export default defineComponent({
     name: "Home",
     components : {
-        PostList
+        PostList,
+        LeftSideMenu,
     },
 });
 </script>
