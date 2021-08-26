@@ -33,7 +33,7 @@ export default defineComponent({
     },
     setup(props) {
         const localeDate = computed(() => {
-            return dayjs(props.post.date).format("YYYY-MM-DD HH:mm:ss");
+            return dayjs(props.post.date).format("YYYY년 MM월 DD일");
         });
 
         return {

@@ -77,6 +77,19 @@ async function Run()
         JSON.stringify(postsMeta)
     );
 
+    // Copy markdown assets to public
+    try 
+    {
+        await fse.copy(
+            path.resolve(POSTS_DIRECTORY_PATH, "assets"),
+            path.resolve("public/assets"),
+        );   
+    } 
+    catch (error) 
+    {
+        console.log("Failed to copy markdown assets to public directory");
+    }
+
     console.log("Success to copy assets directory");
 }
 
