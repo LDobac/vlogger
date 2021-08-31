@@ -1,6 +1,7 @@
 <template>
     <div class="post-list">
         <post-item 
+            class="post-item"
             v-for="post in posts"
             :key="post.uid"
             :post="post"
@@ -20,7 +21,7 @@ export default defineComponent({
         const app = getCurrentInstance();
         const postLoader = app?.appContext.config.globalProperties.$postLoader as PostLoader;
 
-        const posts = postLoader.GetRecentPostsMetadata(10, 0);
+        const posts = postLoader.GetRecentPosts(10, 0);
 
         return {
             posts
@@ -30,5 +31,12 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+.post-list {
+    display: flex;
+    flex-direction: column;
 
+    .post-item {
+        margin-bottom: 1rem;
+    }
+}
 </style>

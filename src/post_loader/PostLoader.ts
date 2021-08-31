@@ -29,9 +29,11 @@ export default class PostLoader
         return this._tagsMetadata;
     }
 
-    public GetRecentPostsMetadata(count = 10, offset = 0) : PostMetadata[]
+    public GetRecentPosts(count = 10, offset = 0) : Post[]
     {
-        return this.postMetadatas.slice(offset, count);
+        return this.postMetadatas.slice(offset, count).map((meta) => {
+            return new Post(meta.uid, this);
+        });
     }
 
     public GetPostById(id : number) : Post | null

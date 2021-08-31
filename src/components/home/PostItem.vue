@@ -12,27 +12,43 @@
                 v-if="post.thumbnail"
                 class="thumbnail"
             >
-                <img src="{{post.thumbnail}}">
+                <img :src="post.thumbnail">
             </div>
             <div class="info">
-                <h1 class="post-title">{{post.title}}</h1>
+                <h1 class="post-title">
+                    {{post.title}}
+
+                    <span 
+                        class="series"
+                        v-if="post.series" 
+                    >
+                        {{post.series.name}}
+                    </span>
+                </h1>
                 <p class="post-date">{{localeDate}}</p>
-                <p class="post-summery" v-if="post.summery">{{post.summery}}</p>
+                <TagsView 
+                    :tags="post.tags"
+                />
             </div>
+            <p class="post-summery" v-if="post.summery">{{post.summery}}</p>
         </div>
     </router-link>
 </template>
 
 <script lang="ts">
 import { computed, defineComponent, PropType } from "vue";
-import { PostMetadata } from "@/post_loader/models";
+import { TagsView } from "@/components/post";
+import Post from "@/post_loader/Post";
 import dayjs from "dayjs";
 
 export default defineComponent({
     name: "PostItem",
+    components : {
+        TagsView,
+    },
     props : {
         post : {
-            type : Object as PropType<PostMetadata>,
+            type : Object as PropType<Post>,
             required : true,
         }
     },
@@ -56,12 +72,12 @@ a {
 
 .post-item {
     .thumbnail {
-        max-height: 300px;
         margin-bottom: 10px;
 
         img {
             width: 100%;
             height: 100%;
+            max-height: 300px;
             object-fit: cover;
         }
     }
@@ -69,6 +85,17 @@ a {
     .post-title {
         font-size: 2rem;
         margin-bottom: 10px;
+
+        .series {
+            font-size: 1rem;
+            margin-left: 0.25rem;
+
+            color: var(--primary-color);
+
+            &:hover {
+                color: black;
+            }
+        }
     }
 }
 

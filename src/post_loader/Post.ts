@@ -26,6 +26,11 @@ export default class Post
         this.tagsMeta = tagsMeta;
     }
 
+    public get uid() : number
+    {
+        return this.postMeta.uid;
+    }
+
     public get title() : string
     {
         return this.postMeta.title;
@@ -34,6 +39,26 @@ export default class Post
     public get date() : Dayjs
     {
         return dayjs(this.postMeta.date);
+    }
+
+    public get thumbnail() : string
+    {
+        return this.postMeta.thumbnail;
+    }
+
+    public get summery() : string
+    {
+        return this.postMeta.summery;
+    }
+
+    public get series() : Series
+    {
+        return this.seriesMeta;
+    }
+
+    public get tags() : Tag[]
+    {
+        return this.tagsMeta;
     }
     
     public get postContent() : string 

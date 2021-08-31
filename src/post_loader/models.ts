@@ -1,5 +1,6 @@
 interface Series 
 {
+    id : number;
     name : string;
     posts : number[];
 };
@@ -11,6 +12,7 @@ interface SeriesMetadata
 
 interface Tag 
 {
+    id : number;
     name : string;
     posts : number[];
 };

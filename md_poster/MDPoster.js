@@ -554,6 +554,7 @@ class MDPoster
     
             lastSeriesId++;
             this.seriesMeta[lastSeriesId.toString()] = {
+                id : lastSeriesId,
                 name : seriesName,
                 posts : []
             };
@@ -601,6 +602,7 @@ class MDPoster
     
             lastTagId++;
             this.tagsMeta[lastTagId.toString()] = {
+                id : lastTagId,
                 name : tag,
                 posts : []
             };

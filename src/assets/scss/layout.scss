@@ -29,3 +29,19 @@
     border-radius: 12px;
     padding: 2rem;
 }
+
+.rounded-button {
+    background: none;
+
+    font-size: 1rem;
+    border-radius: 24px;
+    border: 1px solid var(--primary-color);
+
+    padding: 6px 12px 6px 12px;
+    color: black;
+
+    &:hover {
+        color: white;
+        background-color: var(--primary-color);
+    }
+}

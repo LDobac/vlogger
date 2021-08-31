@@ -2,8 +2,20 @@
     <LeftSideMenu />
     <article class="card post-view">
         <div class="title-wrap">
-            <h1 class="title">{{post.title}}</h1>
+            <h1 class="title">
+                {{post.title}}
+            </h1>
+            <p 
+                class="series-wrap"
+                v-if="post.series"
+            >
+                From. <router-link class="series" to="#">{{post.series.name}}</router-link>
+            </p>
+
             <p class="date">{{post.date.format("YYYY년 MM월 DD일")}}</p>
+            <TagsView 
+                :tags="post.tags" 
+            />
         </div>
         <div class="content" v-html="post.postContent"></div>
     </article>
@@ -13,12 +25,14 @@
 import { defineComponent, getCurrentInstance } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { LeftSideMenu } from "@/components/";
+import { TagsView } from "@/components/post";
 import PostLoader from "@/post_loader/PostLoader";
 
 export default defineComponent({
     name: "PostView",
     components : {
         LeftSideMenu,
+        TagsView
     },
     setup() {
         const router = useRouter();
@@ -73,6 +87,18 @@ export default defineComponent({
         font-size: 3rem;
         font-weight: bold;
         margin-bottom: 1rem;
+    }
+
+    .series-wrap {
+        .series {
+            font-weight: bold;
+            color: var(--primary-color);
+            text-decoration: none;
+
+            &:hover {
+                color: black;
+            }
+        }
     }
 
     .date {
