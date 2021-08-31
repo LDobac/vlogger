@@ -1,6 +1,10 @@
 <template>
     <LeftSideMenu />
     <article class="card post-view">
+        <div class="title-wrap">
+            <h1 class="title">{{post.title}}</h1>
+            <p class="date">{{post.date.format("YYYY년 MM월 DD일")}}</p>
+        </div>
         <div class="content" v-html="post.postContent"></div>
     </article>
 </template>
@@ -59,10 +63,26 @@ export default defineComponent({
 .post-view {
     grid-area: main;
     width: 100%;
-    height: 100%;
+}
+
+.title-wrap {
+    border-bottom: 1px solid black;
+    padding-bottom: 2rem;
+
+    .title {
+        font-size: 3rem;
+        font-weight: bold;
+        margin-bottom: 1rem;
+    }
+
+    .date {
+
+    }
 }
 
 .content {
+    padding-top: 2rem;
+
     img {
         width: 100%;
         height: 100%;

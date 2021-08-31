@@ -1,3 +1,4 @@
+import dayjs, { Dayjs } from "dayjs";
 import { PostMetadata, Series, Tag } from "./models";
 import PostLoader from "./PostLoader";
 
@@ -23,6 +24,16 @@ export default class Post
         this.postMeta = postMeta;
         this.seriesMeta = seriesMeta;
         this.tagsMeta = tagsMeta;
+    }
+
+    public get title() : string
+    {
+        return this.postMeta.title;
+    }
+
+    public get date() : Dayjs
+    {
+        return dayjs(this.postMeta.date);
     }
     
     public get postContent() : string 
