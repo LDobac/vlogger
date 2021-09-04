@@ -12,10 +12,10 @@
             </p>
         </h1>
         <nav class="nav-menu">
-            <router-link to="#" class="nav-item">Home</router-link>
-            <router-link to="#" class="nav-item">About</router-link>
-            <router-link to="#" class="nav-item">Github</router-link>
-            <router-link to="#" class="nav-item">Instagram</router-link>
+            <router-link to="/" class="nav-item">Home</router-link>
+            <router-link to="/about" class="nav-item">About</router-link>
+            <a href="https://github.com/LDobac" target="_blank" class="nav-item">Github</a>
+            <a href="https://www.instagram.com/jaehee24_/" target="_blank" class="nav-item">Instagram</a>
         </nav>
     </header>
 </template>
