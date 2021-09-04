@@ -14,23 +14,26 @@
             >
                 <img :src="post.thumbnail">
             </div>
-            <div class="info">
-                <h1 class="post-title">
-                    {{post.title}}
+            <div class="content">
+                <div class="info">
+                    <h1 class="post-title">
+                        {{post.title}}
 
-                    <span 
-                        class="series"
-                        v-if="post.series" 
-                    >
-                        {{post.series.name}}
-                    </span>
-                </h1>
-                <p class="post-date">{{localeDate}}</p>
-                <TagsView 
-                    :tags="post.tags"
-                />
+                        <span 
+                            class="series"
+                            v-if="post.series" 
+                        >
+                            {{post.series.name}}
+                        </span>
+                    </h1>
+                    <p class="post-date">&#x1F4C5; {{localeDate}}</p>
+                    <TagsView 
+                        class="tags"
+                        :tags="post.tags"
+                    />
+                </div>
+                <p class="post-summery" v-if="post.summery">{{post.summery}}</p>
             </div>
-            <p class="post-summery" v-if="post.summery">{{post.summery}}</p>
         </div>
     </router-link>
 </template>
@@ -71,24 +74,28 @@ a {
 }
 
 .post-item {
-    .thumbnail {
-        margin-bottom: 10px;
+    padding: 0;
 
+    .content {
+        padding: 2rem;
+    }
+
+    .thumbnail {
         img {
             width: 100%;
             height: 100%;
             max-height: 300px;
             object-fit: cover;
+            border-radius: 12px 12px 0 0;
         }
     }
 
     .post-title {
         font-size: 2rem;
-        margin-bottom: 10px;
+        margin-bottom: 0.625rem;
 
         .series {
             font-size: 1rem;
-            margin-left: 0.25rem;
 
             color: var(--primary-color);
 
@@ -99,4 +106,11 @@ a {
     }
 }
 
+.tags {
+    padding-top: 1rem;
+}
+
+.post-summery {
+    margin-top: 2rem;
+}
 </style>

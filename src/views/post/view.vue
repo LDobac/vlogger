@@ -4,16 +4,16 @@
         <div class="title-wrap">
             <h1 class="title">
                 {{post.title}}
+                <span 
+                    class="series-wrap"
+                    v-if="post.series"
+                >
+                    <router-link class="series" to="#">{{post.series.name}}</router-link>
+                </span>
             </h1>
-            <p 
-                class="series-wrap"
-                v-if="post.series"
-            >
-                From. <router-link class="series" to="#">{{post.series.name}}</router-link>
-            </p>
-
-            <p class="date">{{post.date.format("YYYY년 MM월 DD일")}}</p>
+            <p class="date">&#x1F4C5; {{post.date.format("YYYY년 MM월 DD일")}}</p>
             <TagsView 
+                class="tags"
                 :tags="post.tags" 
             />
         </div>
@@ -22,17 +22,21 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, getCurrentInstance } from "vue";
+import { defineComponent, getCurrentInstance, onMounted } from "vue";
 import { useRoute, useRouter } from "vue-router";
+
+import "highlight.js/styles/base16/darcula.css";
+import hljs from "highlight.js/lib/common";
+
+import PostLoader from "@/post_loader/PostLoader";
 import { LeftSideMenu } from "@/components/";
 import { TagsView } from "@/components/post";
-import PostLoader from "@/post_loader/PostLoader";
 
 export default defineComponent({
     name: "PostView",
     components : {
         LeftSideMenu,
-        TagsView
+        TagsView,
     },
     setup() {
         const router = useRouter();
@@ -43,6 +47,7 @@ export default defineComponent({
 
         try 
         {
+            // Load post data
             const postId = parseInt(route.params.id as string);
 
             const post = postLoader.GetPostById(postId);
@@ -53,6 +58,11 @@ export default defineComponent({
                     name: "NotFound",
                 });
             }
+
+            // Set hightlight.js
+            onMounted(() => {
+                hljs.highlightAll();
+            });
 
             return {
                 post,
@@ -81,28 +91,31 @@ export default defineComponent({
 
 .title-wrap {
     border-bottom: 1px solid black;
-    padding-bottom: 2rem;
+    padding-bottom: 1rem;
 
     .title {
         font-size: 3rem;
         font-weight: bold;
-        margin-bottom: 1rem;
-    }
 
-    .series-wrap {
-        .series {
-            font-weight: bold;
-            color: var(--primary-color);
-            text-decoration: none;
+        margin-bottom: 0.5rem;
 
-            &:hover {
-                color: black;
+        .series-wrap {
+            font-size: 1rem;
+            
+            .series {
+                font-weight: bold;
+                color: var(--primary-color);
+                text-decoration: none;
+
+                &:hover {
+                    color: black;
+                }
             }
         }
     }
 
-    .date {
-
+    .tags {
+        padding-top: 1rem;
     }
 }
 
@@ -113,5 +126,19 @@ export default defineComponent({
         width: 100%;
         height: 100%;
     }
+
+    pre {
+        padding: 1rem 0;
+    }
+
+    code {
+        border-radius: 12px;
+        font-size: 15px;
+
+        // TODO : Fallback to D2Coding
+        font-family: Consolas, monospace;
+    }
 }
+
+
 </style>
