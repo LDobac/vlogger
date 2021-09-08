@@ -28,6 +28,7 @@
                     </h1>
                     <p class="post-date">&#x1F4C5; {{localeDate}}</p>
                     <TagsView 
+                        v-if="post.tags.length > 0"
                         class="tags"
                         :tags="post.tags"
                     />
@@ -92,7 +93,7 @@ a {
 
     .post-title {
         font-size: 2rem;
-        margin-bottom: 0.625rem;
+        margin-bottom: 1rem;
 
         .series {
             font-size: 1rem;
@@ -111,6 +112,6 @@ a {
 }
 
 .post-summery {
-    margin-top: 2rem;
+    margin-top: 1.5rem;
 }
 </style>

@@ -31,9 +31,20 @@ export default class PostLoader
 
     public GetRecentPosts(count = 10, offset = 0) : Post[]
     {
-        return this.postMetadatas.slice(offset, count).map((meta) => {
-            return new Post(meta.uid, this);
-        });
+        return this.postMetadatas
+            .sort((a, b) => {
+                if (a.date == b.date) return 0;
+
+                if (a.date > b.date)
+                {
+                    return -1;
+                }
+                
+                return 1;
+            })
+            .slice(offset, count).map((meta) => {
+                return new Post(meta.uid, this);
+            });
     }
 
     public GetPostById(id : number) : Post | null

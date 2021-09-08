@@ -17,7 +17,9 @@
                 :tags="post.tags" 
             />
         </div>
-        <div class="content" v-html="post.postContent"></div>
+        <div 
+            class="content markdown-body" 
+            v-html="post.postContent"></div>
     </article>
 </template>
 
@@ -25,8 +27,10 @@
 import { defineComponent, getCurrentInstance, onMounted } from "vue";
 import { useRoute, useRouter } from "vue-router";
 
-import "highlight.js/styles/base16/darcula.css";
+import "highlight.js/styles/base16/google-light.css";
 import hljs from "highlight.js/lib/common";
+
+import "github-markdown-css";
 
 import PostLoader from "@/post_loader/PostLoader";
 import { LeftSideMenu } from "@/components/";
@@ -120,23 +124,20 @@ export default defineComponent({
 }
 
 .content {
+    font-family: inherit;
     padding-top: 2rem;
 
+    // ol {
+    //     list-style: initial;
+    // }
+
+    // ul {
+    //     list-style: initial;
+    // }
+
     img {
-        width: 100%;
-        height: 100%;
-    }
-
-    pre {
-        padding: 1rem 0;
-    }
-
-    code {
-        border-radius: 12px;
-        font-size: 15px;
-
-        // TODO : Fallback to D2Coding
-        font-family: Consolas, monospace;
+        max-width: 100%;
+        max-height: 100%;
     }
 }
 

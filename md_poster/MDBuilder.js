@@ -122,12 +122,12 @@ class MDBuilder
             name : "post_metadata",
             level : "block",
             start(src) {
-                const match = src.match(/(^-{3}[:-{3}\n])(.*)(-{3}[:-{3}\n]?)/s);
+                const match = src.match(/(^\[{3}[:\[{3}\n])(.*)(\]{3}[:\]{3}\n]?)/s);
                 
                 return match?.index;
             },
             tokenizer(src, tokens) {
-                const rule = /(^-{3}[:-{3}\n])(.*)(-{3}[:-{3}\n]?)/s;
+                const rule = /(^\[{3}[:\[{3}\n])(.*)(\]{3}[:\]{3}\n]?)/s;
                 const match = rule.exec(src);
 
                 if (match)
