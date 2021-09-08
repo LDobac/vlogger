@@ -31,7 +31,7 @@ body {
     font-family: Roboto, "Noto Sans KR", Arial, Helvetica, sans-serif;
 
     width: 100%;
-    height: 100%;
+    min-height: 100vh;
 
     display: grid;
     grid-template-areas: 
@@ -41,7 +41,7 @@ body {
     " . . . "
     "footer footer footer";
     grid-template-columns: 25fr minmax(300px, 60fr) 15fr;
-    grid-template-rows: auto 60px auto 80px auto;
+    grid-template-rows: auto 60px auto 80px 64px;
     align-items: flex-start;
     justify-content: flex-start;
 }
