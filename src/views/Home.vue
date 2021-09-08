@@ -9,12 +9,18 @@
 import { defineComponent } from "vue";
 import { LeftSideMenu } from "@/components/";
 import PostList from "@/components/home/PostList.vue";
+import { useRoute } from "vue-router";
 
 export default defineComponent({
     name: "Home",
     components : {
         PostList,
         LeftSideMenu,
+    },
+    setup() {
+        const route = useRoute();
+
+        const { series, tag } = route.query;
     },
 });
 </script>

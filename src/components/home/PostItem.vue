@@ -18,13 +18,7 @@
                 <div class="info">
                     <h1 class="post-title">
                         {{post.title}}
-
-                        <span 
-                            class="series"
-                            v-if="post.series" 
-                        >
-                            {{post.series.name}}
-                        </span>
+                        <SeriesButton v-if="post.series" :series="post.series"/>
                     </h1>
                     <p class="post-date">&#x1F4C5; {{localeDate}}</p>
                     <TagsView 
@@ -41,7 +35,7 @@
 
 <script lang="ts">
 import { computed, defineComponent, PropType } from "vue";
-import { TagsView } from "@/components/post";
+import { TagsView, SeriesButton } from "@/components/post";
 import Post from "@/post_loader/Post";
 import dayjs from "dayjs";
 
@@ -49,6 +43,7 @@ export default defineComponent({
     name: "PostItem",
     components : {
         TagsView,
+        SeriesButton,
     },
     props : {
         post : {

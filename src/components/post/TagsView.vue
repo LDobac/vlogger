@@ -1,14 +1,13 @@
 <template>
     <div class="tags-wrap">
-        <button
-            type="button"
+        <router-link 
             class="rounded-button tag"
-            @click="onButtonClick(tag.id)"
             v-for="tag in tags"
             :key="tag.id"
+            to="/"
         >
             {{tag.name}}
-        </button>
+        </router-link>
     </div>
 </template>
 
@@ -24,8 +23,8 @@ export default defineComponent({
         }
     },
     setup() {
-        const onButtonClick = (/* index : number */) => {
-            // 
+        const onButtonClick = (index : number) => {
+            console.log(index);
         };
 
         return {
@@ -46,6 +45,7 @@ button {
 
     .tag {
         margin-right: 10px;
+        text-decoration: none;
     }
 }
 </style>

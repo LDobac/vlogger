@@ -4,12 +4,7 @@
         <div class="title-wrap">
             <h1 class="title">
                 {{post.title}}
-                <span 
-                    class="series-wrap"
-                    v-if="post.series"
-                >
-                    <router-link class="series" to="#">{{post.series.name}}</router-link>
-                </span>
+                <SeriesButton v-if="post.series" :series="post.series"/>
             </h1>
             <p class="date">&#x1F4C5; {{post.date.format("YYYY년 MM월 DD일")}}</p>
             <TagsView 
@@ -34,13 +29,14 @@ import "github-markdown-css";
 
 import PostLoader from "@/post_loader/PostLoader";
 import { LeftSideMenu } from "@/components/";
-import { TagsView } from "@/components/post";
+import { TagsView, SeriesButton } from "@/components/post";
 
 export default defineComponent({
     name: "PostView",
     components : {
         LeftSideMenu,
         TagsView,
+        SeriesButton,
     },
     setup() {
         const router = useRouter();
@@ -102,20 +98,6 @@ export default defineComponent({
         font-weight: bold;
 
         margin-bottom: 0.5rem;
-
-        .series-wrap {
-            font-size: 1rem;
-            
-            .series {
-                font-weight: bold;
-                color: var(--primary-color);
-                text-decoration: none;
-
-                &:hover {
-                    color: black;
-                }
-            }
-        }
     }
 
     .tags {
@@ -126,14 +108,6 @@ export default defineComponent({
 .content {
     font-family: inherit;
     padding-top: 2rem;
-
-    // ol {
-    //     list-style: initial;
-    // }
-
-    // ul {
-    //     list-style: initial;
-    // }
 
     img {
         max-width: 100%;
