@@ -35,9 +35,10 @@
 
 <script lang="ts">
 import { computed, defineComponent, PropType } from "vue";
-import { TagsView, SeriesButton } from "@/components/post";
 import Post from "@/post_loader/Post";
 import dayjs from "dayjs";
+
+import { TagsView, SeriesButton } from "@/components/post";
 
 export default defineComponent({
     name: "PostItem",

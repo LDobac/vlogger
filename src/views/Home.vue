@@ -1,31 +1,33 @@
 <template>
-    <LeftSideMenu />
-    <div 
-        :class="postFilter.type"
-        class="post-filter"
-        v-if="postFilter.type"
-    >
-        <p>{{selectedFilterName}}</p>
-    </div>
-    <main class="home">
-        <post-list 
-            :filter="postFilter"
-        />
-    </main>
+    <ContentWithSideMenu>
+        <div 
+            :class="postFilter.type"
+            class="post-filter"
+            v-if="postFilter.type"
+        >
+            <p>{{selectedFilterName}}</p>
+        </div>
+        <main class="home">
+            <post-list 
+                :filter="postFilter"
+            />
+        </main>
+    </ContentWithSideMenu>
 </template>
 
 <script lang="ts">
 import { computed, defineComponent, getCurrentInstance, reactive, watch } from "vue";
-import { LeftSideMenu } from "@/components/";
-import PostList from "@/components/home/PostList.vue";
 import { LocationQuery, useRoute } from "vue-router";
+
 import PostLoader from "@/post_loader/PostLoader";
+import { ContentWithSideMenu } from "@/components/layouts";
+import { PostList } from "@/components/home";
 
 export default defineComponent({
     name: "Home",
     components : {
         PostList,
-        LeftSideMenu,
+        ContentWithSideMenu,
     },
     setup() {
         const route = useRoute();
@@ -96,12 +98,12 @@ export default defineComponent({
     font-size: 3rem;
 
     &.series {
-        background: #FECD71;
+        background: var(--series-primary-color);
         color: white;
     }
 
     &.tag {
-        background: #7D97A5;
+        background: var(--tag-primary-color);
         color: white;
     }
 }
