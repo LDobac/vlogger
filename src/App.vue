@@ -41,7 +41,7 @@ body {
     " . . . "
     "footer footer footer";
     grid-template-columns: 25fr minmax(300px, 60fr) 15fr;
-    grid-template-rows: auto 60px auto 80px 64px;
+    grid-template-rows: auto minmax(auto, 60px) auto 80px minmax(64px, auto);
     align-items: flex-start;
     justify-content: flex-start;
 }

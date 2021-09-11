@@ -4,7 +4,12 @@
             class="rounded-button tag"
             v-for="tag in tags"
             :key="tag.id"
-            to="/"
+            :to="{
+                path : '/',
+                query : {
+                    tag : tag.id,
+                },
+            }"
         >
             {{tag.name}}
         </router-link>

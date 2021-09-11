@@ -1,4 +1,4 @@
-import { PostMetadata, SeriesMetadata, TagsMetadata } from "./models";
+import { PostFilter, PostMetadata, SeriesMetadata, TagsMetadata } from "./models";
 import Post from "./Post";
 
 export default class PostLoader 
@@ -29,9 +29,9 @@ export default class PostLoader
         return this._tagsMetadata;
     }
 
-    public GetRecentPosts(count = 10, offset = 0) : Post[]
+    public GetRecentPosts(count = 10, offset = 0, filter : PostFilter | null = null) : Post[]
     {
-        return this.postMetadatas
+        let posts = this.postMetadatas
             .sort((a, b) => {
                 if (a.date == b.date) return 0;
 
@@ -39,12 +39,36 @@ export default class PostLoader
                 {
                     return -1;
                 }
-                
+                            
                 return 1;
-            })
-            .slice(offset, count).map((meta) => {
+            });
+
+        if (filter)
+        {
+            posts = posts.filter((postMeta) => {
+                if (filter.type == "series")
+                {
+                    return filter.id === postMeta.series;
+                }
+                else if (filter.type == "tag")
+                {
+                    return postMeta.tags.includes(filter.id);
+                }
+            });
+        }
+
+        if (count == -1)
+        {
+            return posts.map((meta) => {
                 return new Post(meta.uid, this);
             });
+        }
+        else
+        {
+            return posts.slice(offset, count).map((meta) => {
+                return new Post(meta.uid, this);
+            });
+        }
     }
 
     public GetPostById(id : number) : Post | null

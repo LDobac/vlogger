@@ -3,7 +3,15 @@
         class="series-wrap"
         v-if="series"
     >
-        <router-link class="series" to="/">{{series.name}}</router-link>
+        <router-link 
+            class="series" 
+            :to="{
+                path : '/',
+                query : {
+                    series : series.id,
+                },
+            }"
+        >{{series.name}}</router-link>
     </span>
 </template>
 
