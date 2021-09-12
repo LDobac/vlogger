@@ -23,7 +23,24 @@ export default defineComponent({
 
     margin: 0 2rem 0 auto;
 
-    max-width: 250px;
+    max-width: 300px;
     width: 100%;
+
+    @include m-xxl {
+        max-width: 250px;
+    }
+
+    @include m-xl {
+        max-width: 200px;
+    }
+
+    @include m-lg {
+        max-width: 200px;
+        margin-right: 1rem;
+    }
+
+    @include m-md {
+        display: none;
+    }
 }
 </style>

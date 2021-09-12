@@ -75,6 +75,36 @@ a {
 
     .content {
         padding: 2rem;
+
+        @include m-sm {
+            padding: 1.25rem;
+        }
+
+        .info {
+            .post-title {
+                font-size: 2rem;
+                margin-bottom: 1rem;
+
+                @include m-sm {
+                    font-size: 1.5rem;
+                    margin-bottom: 0.5rem;
+                }
+            }
+
+            .post-date {
+                @include m-sm {
+                    font-size: 0.9rem;
+                }
+            }
+        }
+
+        .post-summery {
+            margin-top: 1.5rem;
+
+            @include m-sm {
+                margin-top: 1rem;
+            }
+        }
     }
 
     .thumbnail {
@@ -86,28 +116,9 @@ a {
             border-radius: 12px 12px 0 0;
         }
     }
-
-    .post-title {
-        font-size: 2rem;
-        margin-bottom: 1rem;
-
-        .series {
-            font-size: 1rem;
-
-            color: var(--primary-color);
-
-            &:hover {
-                color: black;
-            }
-        }
-    }
 }
 
 .tags {
     padding-top: 1rem;
-}
-
-.post-summery {
-    margin-top: 1.5rem;
 }
 </style>

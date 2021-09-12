@@ -18,10 +18,13 @@
                     v-html="post.postContent"></article>
             </div>
 
-            <SeriesNavigator 
-                v-if="post.series"
-                :siblingSeriesPost="siblingSeriesPost"
-            />
+            <div class="extra-content">
+                <SeriesNavigator 
+                    class="series-navigator"
+                    v-if="post.series"
+                    :siblingSeriesPost="siblingSeriesPost"
+                />
+            </div>
         </div>
     </ContentWithSideMenu>
 </template>
@@ -154,7 +157,7 @@ article {
 }
 
 .series-navigator {
-
+    margin-top: 2rem;
 }
 
 </style>

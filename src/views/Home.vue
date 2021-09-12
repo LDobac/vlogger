@@ -92,7 +92,7 @@ export default defineComponent({
 
     text-align: center;
 
-    padding: 6rem;
+    padding: 4rem;
     margin-bottom: 6rem;
 
     font-size: 3rem;

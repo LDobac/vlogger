@@ -92,5 +92,9 @@ export default defineComponent({
     .nav-item:hover {
         color: var(--primary-color);
     }
+
+    @include m-md {
+        padding: 2rem 0;
+    }
 }
 </style>
