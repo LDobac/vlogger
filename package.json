@@ -4,11 +4,12 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
+    "build": "node ./scripts/BuildPosts.js && vue-cli-service build",
     "build:posts": "node ./scripts/BuildPosts.js",
     "test:unit": "vue-cli-service test:unit",
     "test:e2e": "vue-cli-service test:e2e",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "deploy" : "gh-pages -d dist"
   },
   "dependencies": {
     "core-js": "^3.6.5",
@@ -35,6 +36,7 @@
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^7.0.0",
     "fs-extra": "^10.0.0",
+    "gh-pages": "^3.2.3",
     "marked": "^2.1.3",
     "node-sass": "^6.0.1",
     "replace-ext": "^2.0.0",
