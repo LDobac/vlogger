@@ -11,7 +11,7 @@
                 },
             }"
         >
-            {{tag.name}}
+            &#35;&nbsp;{{tag.name}}
         </router-link>
     </div>
 </template>
