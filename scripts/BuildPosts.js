@@ -37,25 +37,46 @@ async function Run()
         console.log(error);
     }
 
+    // Remove exists at dest build file.
     await fse.remove(path.resolve(DEST_PATH));
 
+    // Copy build file to dest
     await fse.copy(
         path.resolve(POSTS_DIRECTORY_PATH, MDPoster.BUILD_DIR_NAME),
         path.resolve(DEST_PATH),
     );
 
+    // Copy markdown assets to public
+    try 
+    {
+        // Copy assets to dest
+        await fse.copy(
+            path.resolve(POSTS_DIRECTORY_PATH, "assets"),
+            path.resolve("public/assets"),
+        );
+    } 
+    catch (error) 
+    {
+        console.log("Failed to copy markdown assets to public directory");
+    }
+
     // Chagne result html file to json format
     const rawPostMeta = await fs.readFile(path.resolve(DEST_PATH, MDPoster.POSTS_METADATA_FILE));
+    const publicPath = require("../vue.config").publicPath;
 
     const postsMeta = JSON.parse(rawPostMeta);
     for (const post of postsMeta) 
     {
-        const htmlFile = await fs.readFile(
+        let htmlFile = await fs.readFile(
             path.resolve(DEST_PATH, MDPoster.POST_BUILD_DIR_NAME, post.htmlFileName),
             {
                 encoding : "utf8",
             }
         );
+
+        // Resolve asset path
+        htmlFile = htmlFile.replace(/\/assets/gm, path.join(publicPath, "/assets"));
+        post.thumbnail = post.thumbnail.replace(/\/assets/gm, path.join(publicPath, "/assets"));
 
         const content = {
             "content" : htmlFile,
@@ -76,19 +97,6 @@ async function Run()
         path.resolve(DEST_PATH, MDPoster.POSTS_METADATA_FILE), 
         JSON.stringify(postsMeta)
     );
-
-    // Copy markdown assets to public
-    try 
-    {
-        await fse.copy(
-            path.resolve(POSTS_DIRECTORY_PATH, "assets"),
-            path.resolve("public/assets"),
-        );   
-    } 
-    catch (error) 
-    {
-        console.log("Failed to copy markdown assets to public directory");
-    }
 
     console.log("Success to copy assets directory");
 }
