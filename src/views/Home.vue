@@ -82,6 +82,7 @@ export default defineComponent({
     grid-area: main;
     width: 100%;
     height: 100%;
+    max-width: 1200px;
 }
 
 .post-filter {
@@ -105,6 +106,17 @@ export default defineComponent({
     &.tag {
         background: var(--tag-primary-color);
         color: white;
+    }
+
+    @include m-lg {
+        padding: 2rem;
+        margin-bottom: 4rem;
+    }
+
+    @include m-sm {
+        margin-bottom: 3rem;
+        padding: 2rem;
+        font-size: 2rem;
     }
 }
 </style>

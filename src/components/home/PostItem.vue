@@ -20,7 +20,9 @@
                         {{post.title}}
                         <SeriesButton v-if="post.series" :series="post.series"/>
                     </h1>
-                    <p class="post-date">&#x1F4C5; {{localeDate}}</p>
+                    <FormattedDate 
+                        :date="post.date"
+                    />
                     <TagsView 
                         v-if="post.tags.length > 0"
                         class="tags"
@@ -34,10 +36,10 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, PropType } from "vue";
+import { defineComponent, PropType } from "vue";
 import Post from "@/post_loader/Post";
-import dayjs from "dayjs";
 
+import { Date as FormattedDate } from "@/components";
 import { TagsView, SeriesButton } from "@/components/post";
 
 export default defineComponent({
@@ -45,20 +47,12 @@ export default defineComponent({
     components : {
         TagsView,
         SeriesButton,
+        FormattedDate
     },
     props : {
         post : {
             type : Object as PropType<Post>,
             required : true,
-        }
-    },
-    setup(props) {
-        const localeDate = computed(() => {
-            return dayjs(props.post.date).format("YYYY년 MM월 DD일");
-        });
-
-        return {
-            localeDate
         }
     },
 });
@@ -77,7 +71,7 @@ a {
         padding: 2rem;
 
         @include m-sm {
-            padding: 1.25rem;
+            padding: 1.15rem;
         }
 
         .info {
@@ -103,6 +97,7 @@ a {
 
             @include m-sm {
                 margin-top: 1rem;
+                font-size: 0.9rem;
             }
         }
     }

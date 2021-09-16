@@ -7,7 +7,9 @@
                         {{post.title}}
                         <SeriesButton v-if="post.series" :series="post.series"/>
                     </h1>
-                    <p class="date">&#x1F4C5; {{post.date.format("YYYY년 MM월 DD일")}}</p>
+                    <FormattedDate 
+                        :date="post.date"
+                    />
                     <TagsView 
                         class="tags"
                         :tags="post.tags" 
@@ -39,6 +41,7 @@ import hljs from "highlight.js/lib/common";
 import "github-markdown-css";
 
 import PostLoader from "@/post_loader/PostLoader";
+import { Date as FormattedDate } from "@/components";
 import { TagsView, SeriesButton, SeriesNavigator } from "@/components/post";
 import { ContentWithSideMenu } from "@/components/layouts";
 import Post from "@/post_loader/Post";
@@ -49,7 +52,8 @@ export default defineComponent({
         TagsView,
         ContentWithSideMenu,
         SeriesButton,
-        SeriesNavigator
+        SeriesNavigator,
+        FormattedDate
     },
     setup() {
         // Set hightlight.js
@@ -128,21 +132,33 @@ export default defineComponent({
 .post-view {
     grid-area: main;
     width: 100%;
-}
+    max-width: 1200px;
 
-.title-wrap {
-    border-bottom: 1px solid black;
-    padding-bottom: 1rem;
+    .content {
+        .title-wrap {
+            border-bottom: 1px solid black;
+            padding-bottom: 1rem;
 
-    .title {
-        font-size: 3rem;
-        font-weight: bold;
+            .title {
+                font-size: 3rem;
+                font-weight: bold;
 
-        margin-bottom: 0.5rem;
-    }
+                margin-bottom: 0.5rem;
 
-    .tags {
-        padding-top: 1rem;
+                @include m-sm {
+                    font-size: 2rem;
+                }
+            }
+
+            .tags {
+                padding-top: 1rem;
+            }
+        }
+
+        @include m-sm {
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
     }
 }
 
@@ -158,6 +174,10 @@ article {
 
 .series-navigator {
     margin-top: 2rem;
+
+    @include m-sm {
+        margin-top: 1.5rem;
+    }
 }
 
 </style>

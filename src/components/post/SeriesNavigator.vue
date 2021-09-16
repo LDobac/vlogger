@@ -76,11 +76,29 @@ export default defineComponent({
     &.prev-button {
         text-align: left;
         padding-left: 40px;
+
+        @include m-sm {
+            padding-left: 16px;
+        }
     }
 
     &.next-button {
         text-align: right;
         padding-right: 40px;
+
+        @include m-sm {
+            padding-right: 16px;
+        }
+    }
+
+    @include m-sm {
+        min-width: unset;
+        max-width: unset;
+
+        width: 40%;
+        font-size: 1.1rem;
+
+        padding: 8px 0;
     }
 }
 

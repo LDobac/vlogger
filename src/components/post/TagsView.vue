@@ -51,6 +51,10 @@ button {
     .tag {
         margin-right: 10px;
         text-decoration: none;
+
+        @include m-sm {
+            font-size: 0.9rem;
+        }
     }
 }
 </style>
