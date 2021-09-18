@@ -1,5 +1,5 @@
 module.exports = {
-    publicPath : "/vlogger",
+    publicPath : "/",
     chainWebpack: config => {
         config
         .plugin('html')
