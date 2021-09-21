@@ -1,7 +1,10 @@
 <template>
     <aside class="side-menu">
         <div class="card">
-            <p>Hello This is Side menu!</p>
+            <p>아직 별 넣을 내용이 없읍니다.</p>
+            <br>
+            <p>귀여운 저희 집 고양이나 봐주세요</p>
+            <img src="@/assets/images/귀여운_고양이_1.jpg">
         </div>
     </aside>
 </template>
@@ -25,6 +28,11 @@ export default defineComponent({
 
     max-width: 300px;
     width: 100%;
+
+    img {
+        object-fit: cover;
+        width: 100%;
+    }
 
     @include m-xxl {
         max-width: 250px;
