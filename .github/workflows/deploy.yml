@@ -26,7 +26,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v2.4.0
         with:
-          node-version: 12.x
+          node-version: 14.x
       - name: Install dependencies
         run: yarn install
         
@@ -39,8 +39,7 @@ jobs:
           NODE_ENV: production
         
       - name: Deploy to gh-pages branch
-        uses: crazy-max/ghaction-github-pages@v2.5.0
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          domain: jaehee.dev
-          build_dir: dist/
-          jekyll: false
+          publish_dir: ./dist
+          github_token: ${{ secrets.GITHUB_TOKEN }}
