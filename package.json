@@ -9,7 +9,7 @@
     "test:unit": "vue-cli-service test:unit",
     "test:e2e": "vue-cli-service test:e2e",
     "lint": "vue-cli-service lint",
-    "deploy" : "gh-pages -d dist"
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "core-js": "^3.6.5",
@@ -17,6 +17,7 @@
     "github-markdown-css": "^4.0.0",
     "highlight.js": "^11.2.0",
     "vue": "^3.0.0",
+    "vue-gtag-next": "^1.14.0",
     "vue-router": "^4.0.0-0"
   },
   "devDependencies": {

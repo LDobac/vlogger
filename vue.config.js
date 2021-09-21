@@ -2,12 +2,12 @@ module.exports = {
     publicPath : "/",
     chainWebpack: config => {
         config
-        .plugin('html')
-        .tap(args => {
-            args[0].title = "Jaehee.dev";
+            .plugin("html")
+            .tap(args => {
+                args[0].title = "Jaehee.dev";
 
-            return args;
-        })
+                return args;
+            })
     },
     css : {
         loaderOptions : {
