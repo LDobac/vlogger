@@ -75,8 +75,8 @@ async function Run()
         );
 
         // Resolve asset path
-        htmlFile = htmlFile.replace(/\/assets/gm, path.join(publicPath, "/assets"));
-        post.thumbnail = post.thumbnail.replace(/\/assets/gm, path.join(publicPath, "/assets"));
+        htmlFile = htmlFile.replace(/.\/assets/gm, path.join(publicPath, "/assets"));
+        post.thumbnail = post.thumbnail.replace(/.\/assets/gm, path.join(publicPath, "/assets"));
 
         const content = {
             "content" : htmlFile,
