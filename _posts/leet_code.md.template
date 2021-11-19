@@ -9,18 +9,19 @@ tags : ["Leet Code", "medium", "c++"]
 문제 - [LeetCode 2. Add Two Numbers](https://leetcode.com/problems/add-two-numbers/)
 
 ## 문제 설명
-![LinkedList Example](./assets/images/leet_code/2.add_two_number/overflow.png)
 난이도는 `MEDIUM` 난이도 입니다.
 
 ## 풀이
+[My Solutions(Github)](https://github.com/LDobac/leetcode/tree/master/14.%20Longest%20Common%20Prefix)
+
 ### Solution
 
 #### 제출 결과
-![Solution 1 result](./assets/images/leet_code/two_sum/sol1_result.png)
+![Solution 1 result](./assets/images/leet_code/14/result_1.png)
 
 <details>
 <summary>코드 전문</summary>
-    
+
 ```c++
 
 ```
