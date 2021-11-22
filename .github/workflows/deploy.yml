@@ -32,6 +32,8 @@ jobs:
         
       - name: Build Posts
         run: yarn build:posts
+        env:
+          TZ: Asia/Seoul
       
       - name: Build Blog
         run: yarn build
