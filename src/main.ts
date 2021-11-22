@@ -8,14 +8,18 @@ import dayjs from "dayjs";
 
 dayjs.locale("ko");
 
-const app = createApp(App);
-app.config.globalProperties.$postLoader = new PostLoader();
+const postLoader = new PostLoader();
+postLoader.LoadMetadatas().then(() => {
+    const app = createApp(App);
+    app.config.globalProperties.$postLoader = postLoader;
+    
+    app
+        .use(router)
+        .use(VueGtag, {
+            property : {
+                id : "G-BLG37NTK4J",
+            }
+        })
+        .mount("#app");
+});
 
-app
-    .use(router)
-    .use(VueGtag, {
-        property : {
-            id : "G-BLG37NTK4J",
-        }
-    })
-    .mount("#app");

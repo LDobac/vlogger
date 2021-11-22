@@ -17,7 +17,7 @@
                 </div>
                 <article 
                     class="markdown-body" 
-                    v-html="post.postContent"></article>
+                    v-html="content"></article>
             </div>
 
             <div class="extra-content">
@@ -68,12 +68,13 @@ export default defineComponent({
         const postLoader = app?.appContext.config.globalProperties.$postLoader as PostLoader;
 
         const post = ref<Post | null>(null);
+        const content = ref<string | undefined>("");
         const siblingSeriesPost = reactive({
             next : {},
             prev : {},
         });
 
-        const LoadPost = (postId : number) => {
+        const LoadPost = async (postId : number) => {
             post.value = postLoader.GetPostById(postId);
             if (!post.value)
             {
@@ -81,6 +82,8 @@ export default defineComponent({
                     name: "NotFound",
                 });
             }
+
+            content.value = await post.value?.GetContent();
 
             if (post.value?.nextSeriesId)
             {
@@ -122,6 +125,7 @@ export default defineComponent({
 
         return {
             post,
+            content,
             siblingSeriesPost
         };
     },

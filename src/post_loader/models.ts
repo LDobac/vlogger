@@ -27,7 +27,7 @@ interface PostMetadata
     title : string;
     thumbnail : string;
     summery : string;
-    date : Date;
+    date : string;
     series : number;
     tags : number[];
     originFile : string;

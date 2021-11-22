@@ -7,11 +7,28 @@ export default class PostLoader
     private _seriesMetadata : SeriesMetadata;
     private _tagsMetadata : TagsMetadata;
 
+    public dataHasLoaded : boolean;
+
     public constructor()
     {
-        this._postMetadatas = require("@/assets/.build/post.json");
-        this._seriesMetadata = require("@/assets/.build/series.json");
-        this._tagsMetadata = require("@/assets/.build/tags.json");
+        this._postMetadatas = new Array<PostMetadata>();
+        this._seriesMetadata = {};
+        this._tagsMetadata = {};
+
+        this.dataHasLoaded = false;
+    }
+
+    public async LoadMetadatas() : Promise<void>
+    {
+        this._postMetadatas = (await import(/* webpackChunkName: "post_metadata" */ "@/assets/.build/post.json")).default;
+        this._seriesMetadata = (await import(/* webpackChunkName: "series_metadata" */ "@/assets/.build/series.json")).default;
+        this._tagsMetadata = (await import(/* webpackChunkName: "tags_metadata" */ "@/assets/.build/tags.json")).default;
+        
+        console.log("Loaded Post metadata : ", this._postMetadatas);
+        console.log("Loaded Series metadata : ", this._seriesMetadata);
+        console.log("Loaded Tags metadata : ", this._tagsMetadata);
+
+        this.dataHasLoaded = true;
     }
 
     public get postMetadatas() : PostMetadata[]

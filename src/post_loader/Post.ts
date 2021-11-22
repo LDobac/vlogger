@@ -37,6 +37,17 @@ export default class Post
         }
     }
 
+    public async GetContent() : Promise<string>
+    {
+        const htmlFile = await import(
+            /* webpackChunkName: "post-[request]-[index]" */ 
+            /* webpackMode: "lazy" */
+            `@/assets/.build/build_posts/${this.postMeta.htmlFileName}`
+        );
+
+        return htmlFile.content;
+    }
+
     public get uid() : number
     {
         return this.postMeta.uid;
@@ -70,13 +81,6 @@ export default class Post
     public get tags() : Tag[]
     {
         return this.tagsMeta;
-    }
-    
-    public get postContent() : string 
-    {
-        const htmlFile = require(`@/assets/.build/build_posts/${this.postMeta.htmlFileName}`);
-
-        return htmlFile.content;
     }
 
     public get nextSeriesId() : number | null
