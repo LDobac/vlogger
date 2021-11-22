@@ -46,6 +46,9 @@ async function Run()
         path.resolve(DEST_PATH),
     );
 
+    // Remove exists images at public assets.
+    await fse.remove(path.resolve("public/assets"));
+
     // Copy markdown assets to public
     try 
     {

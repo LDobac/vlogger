@@ -74,7 +74,7 @@ class MDPoster
 
                 if (markdownFile.exists)
                 {
-                    this.ModifyPostsMetadata(markdownFile.mtime, markdownFile.postUid, mdPostData);
+                    await this.ModifyPostsMetadata(markdownFile.mtime, markdownFile.postUid, mdPostData);
                 }
                 else
                 {
@@ -364,13 +364,16 @@ class MDPoster
 
         const fileStat = await fs.stat(path.resolve(this.savedDir, originFile));
 
+        // Save Content
         await fs.writeFile(
-                htmlFilePathAbs,
-                mdPostData.content, 
-                {
-                    "encoding" : "utf8",
-                });
+            htmlFilePathAbs,
+            mdPostData.content, 
+            {
+                "encoding" : "utf8",
+            }
+        );
 
+        // Set post metadata
         this.postsMeta.push({
             uid : newPostId,
             title : mdPostData.title,
@@ -393,7 +396,7 @@ class MDPoster
      * @param {MDPostData} mdPostData 
      * @throws
      */
-    ModifyPostsMetadata(mtime, postUid, mdPostData)
+    async ModifyPostsMetadata(mtime, postUid, mdPostData)
     {
         const curPostMeta = this.postsMeta.find(meta => meta.uid === postUid);
 
@@ -446,7 +449,7 @@ class MDPoster
             this.tagsMeta[deletedTagId.toString()].posts = tagPosts;
         }
 
-        const addedTags = nowTagIds.filter(e => curPostMeta.tags.includes(e));
+        const addedTags = nowTagIds.filter(e => !curPostMeta.tags.includes(e));
         for (const addedTagId of addedTags)
         {
             this.tagsMeta[addedTagId.toString()].posts.push(curPostMeta.uid);
@@ -456,9 +459,17 @@ class MDPoster
 
         // Flat the series meta, tags meta, If needed.
 
-        // Apply mtime
+        // Modify post content
+        await fs.writeFile(
+            curPostMeta.htmlFilePath,
+            mdPostData.content, 
+            {
+                "encoding" : "utf8",
+            }
+        );
+
+        // Modify post metadata
         curPostMeta.title = mdPostData.title;
-        curPostMeta.content = mdPostData.content;
         curPostMeta.summery = mdPostData.summery;
         curPostMeta.thumbnail = mdPostData.thumbnail;
         curPostMeta.date = mdPostData.date;
