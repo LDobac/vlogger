@@ -10,6 +10,8 @@ const DEST_PATH = "src/assets/.build";
 
 const mdPoster = new MDPoster(POSTS_DIRECTORY_PATH);
 
+console.log("Current Time Zone : ", process.env.TZ);
+
 async function Run()
 {
     const args = process.argv.slice(2);

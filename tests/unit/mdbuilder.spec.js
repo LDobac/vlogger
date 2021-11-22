@@ -1,4 +1,4 @@
-const moment = require("moment");
+const dayjs = require("dayjs");
 const { MDBuilder, MDPostData } = require("../../md_poster/MDBuilder");
 
 describe("Unit test for MDBuilder class", () => {
@@ -16,7 +16,7 @@ describe("Unit test for MDBuilder class", () => {
 
         const expectData = new MDPostData();
         expectData.title = "Chapter 2 : Application Layer";
-        expectData.date = moment("2021-04-13 22:06:43").toISOString(true);
+        expectData.date = dayjs("2021-04-13 22:06:43").toISOString();
         expectData.seriesName = "Test Series";
         expectData.tags = ["tag1", "tag2", "tag3"];
 

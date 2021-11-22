@@ -1,7 +1,12 @@
 const marked = require("marked");
-const moment = require("moment");
+const dayjs = require("dayjs");
+const dayjsTimezone = require("dayjs/plugin/timezone");
+const dayjsUTC = require("dayjs/plugin/utc");
 const YAML = require("yaml");
 const { MDNoMetadata } = require("./MDExceptions");
+
+dayjs.extend(dayjsTimezone);
+dayjs.extend(dayjsUTC);
 
 /**
  * @class MDPostData
@@ -104,7 +109,7 @@ class MDBuilder
         postData.content = renderedHTML;
         postData.summery = parsedMetadata.summery ?? "";
         postData.thumbnail = parsedMetadata.thumbnail ?? "";
-        postData.date = moment(parsedMetadata.date).toISOString(true) ?? moment().toISOString(true);
+        postData.date = dayjs(parsedMetadata.date).tz(process.env.TZ).toISOString() ?? dayjs().tz(process.env.TZ).toISOString();
         postData.seriesName = parsedMetadata.series ?? "";
         postData.tags = parsedMetadata.tags ?? [];
 
