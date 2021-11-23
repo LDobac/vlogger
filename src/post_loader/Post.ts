@@ -19,7 +19,7 @@ export default class Post
             throw new Error("Faild to find post metadata by id");
         }
 
-        const seriesMeta = postLoader.seriesMetadata[postMeta.series] ?? null;
+        const seriesMeta = postMeta.series ? postLoader.seriesMetadata[postMeta.series] : null;
         const tagsMeta = postMeta.tags.map((index) => {
             return postLoader.tagsMetadata[index];
         });
