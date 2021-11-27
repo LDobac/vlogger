@@ -377,7 +377,7 @@ class MDPoster
         this.postsMeta.push({
             uid : newPostId,
             title : mdPostData.title,
-            summery : mdPostData.summery,
+            summary : mdPostData.summary,
             thumbnail : mdPostData.thumbnail,
             date : mdPostData.date,
             series : seriesId,
@@ -470,7 +470,7 @@ class MDPoster
 
         // Modify post metadata
         curPostMeta.title = mdPostData.title;
-        curPostMeta.summery = mdPostData.summery;
+        curPostMeta.summary = mdPostData.summary;
         curPostMeta.thumbnail = mdPostData.thumbnail;
         curPostMeta.date = mdPostData.date;
         curPostMeta.mtime = mtime;

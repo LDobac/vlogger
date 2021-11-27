@@ -26,7 +26,7 @@ interface PostMetadata
     uid : number;
     title : string;
     thumbnail : string;
-    summery : string;
+    summary : string;
     date : string;
     series : number | null;
     tags : number[];

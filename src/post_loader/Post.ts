@@ -68,9 +68,9 @@ export default class Post
         return this.postMeta.thumbnail;
     }
 
-    public get summery() : string
+    public get summary() : string
     {
-        return this.postMeta.summery;
+        return this.postMeta.summary;
     }
 
     public get series() : Series | null

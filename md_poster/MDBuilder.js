@@ -13,7 +13,7 @@ dayjs.extend(dayjsUTC);
  * @type {Object}
  * @property {String} title
  * @property {String} content
- * @property {String} summery
+ * @property {String} summary
  * @property {String} thumbnail
  * @property {String} date
  * @property {String} seriesName
@@ -25,7 +25,7 @@ class MDPostData
     {
         this.title = "";
         this.content = "";
-        this.summery = "";
+        this.summary = "";
         this.thumbnail = "";
         this.date = "";
         this.seriesName = "";
@@ -107,7 +107,7 @@ class MDBuilder
 
         postData.title = parsedMetadata.title;
         postData.content = renderedHTML;
-        postData.summery = parsedMetadata.summery ?? "";
+        postData.summary = parsedMetadata.summary ?? "";
         postData.thumbnail = parsedMetadata.thumbnail ?? "";
         postData.date = dayjs(parsedMetadata.date).tz(process.env.TZ).toISOString() ?? dayjs().tz(process.env.TZ).toISOString();
         postData.seriesName = parsedMetadata.series ?? "";

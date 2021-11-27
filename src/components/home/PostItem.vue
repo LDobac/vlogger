@@ -29,7 +29,7 @@
                         :tags="post.tags"
                     />
                 </div>
-                <p class="post-summery" v-if="post.summery">{{post.summery}}</p>
+                <p class="post-summary" v-if="post.summary">{{post.summary}}</p>
             </div>
         </div>
     </router-link>
@@ -92,7 +92,7 @@ a {
             }
         }
 
-        .post-summery {
+        .post-summary {
             margin-top: 1.5rem;
 
             @include m-sm {
