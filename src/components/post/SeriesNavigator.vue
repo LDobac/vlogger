@@ -1,47 +1,47 @@
 <template>
     <div 
         class="series-navigator"
+        v-if="props.siblingSeriesPost"
     >
         <router-link 
-            v-if="siblingSeriesPost.prev.id"
+            v-if="props.siblingSeriesPost.prev"
             class="prev-button series-button"
             :to="{
                 name : 'PostView', 
                 params : {
-                    id : siblingSeriesPost.prev.id
+                    id : props.siblingSeriesPost.prev.id
                 }
             }"
         >
             <p class="bold">이전</p>
-            {{siblingSeriesPost.prev.title}}
+            {{props.siblingSeriesPost.prev.title}}
         </router-link>
         <div v-else></div>
 
         <router-link 
-            v-if="siblingSeriesPost.next.id"
+            v-if="props.siblingSeriesPost.next"
             class="next-button series-button"
             :to="{
                 name : 'PostView', 
                 params : {
-                    id : siblingSeriesPost.next.id
+                    id : props.siblingSeriesPost.next.id
                 }
             }"
         >
             <p class="bold">다음</p>
-            {{siblingSeriesPost.next.title}}
+            {{props.siblingSeriesPost.next.title}}
         </router-link>
         <div v-else></div>
     </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
+<script lang="ts" setup>
+import { defineProps } from "vue";
+import { ISiblingSeriesPost } from "@/views/post/view.vue";
 
-export default defineComponent({
-    props : {
-        siblingSeriesPost : Object,
-    }
-})
+const props = defineProps<{
+    siblingSeriesPost : ISiblingSeriesPost
+}>();
 </script>
 
 <style lang="scss" scoped>
@@ -56,7 +56,7 @@ export default defineComponent({
     max-width: 360px;
     padding: 16px 0;
     background: white;
-    font-size: 1.5rem;
+    font-size: 1rem;
     border-radius: 12px;
     border: 1px solid var(--primary-color);
     text-decoration: none;

@@ -79,8 +79,12 @@ a {
                 font-size: 2rem;
                 margin-bottom: 1rem;
 
-                @include m-sm {
+                @include m-md {
                     font-size: 1.5rem;
+                }
+
+                @include m-sm {
+                    font-size: 1.25rem;
                     margin-bottom: 0.5rem;
                 }
             }

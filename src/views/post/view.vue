@@ -1,6 +1,6 @@
 <template>
-    <ContentWithSideMenu>
-        <div class="post-view">
+    <div class="post-view">
+        <div class="post-container" v-if="post">
             <div class="card content">
                 <div class="title-wrap">
                     <h1 class="title">
@@ -20,19 +20,31 @@
                     v-html="content"></article>
             </div>
 
-            <div class="extra-content">
+            <div class="series-navigator-container">
                 <SeriesNavigator 
-                    class="series-navigator"
                     v-if="post.series"
                     :siblingSeriesPost="siblingSeriesPost"
                 />
             </div>
         </div>
-    </ContentWithSideMenu>
+        <div v-else>
+            <div class="card content">
+                <div class="title-wrap">
+                    <h1 class="title">
+                        <p>Error!</p>
+                        <p>Content Not found!</p>
+                    </h1>
+                </div>
+                <div>
+                    <button @click="router.back()">Go Back</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, getCurrentInstance, onMounted, reactive, ref, watch } from "vue";
+import { defineComponent, onMounted, reactive, ref, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
 
 import "highlight.js/styles/base16/google-light.css";
@@ -40,17 +52,26 @@ import hljs from "highlight.js/lib/common";
 
 import "github-markdown-css";
 
-import PostLoader from "@/post_loader/PostLoader";
 import { Date as FormattedDate } from "@/components";
 import { TagsView, SeriesButton, SeriesNavigator } from "@/components/post";
-import { ContentWithSideMenu } from "@/components/layouts";
 import Post from "@/post_loader/Post";
+import { usePostLoader } from "@/composable/PostLoader";
+
+export interface ISiblingSeriesPost {
+    next? : {
+        id: number;
+        title: string;
+    };
+    prev? : {
+        id: number;
+        title: string;
+    };
+}
 
 export default defineComponent({
     name: "PostView",
     components : {
         TagsView,
-        ContentWithSideMenu,
         SeriesButton,
         SeriesNavigator,
         FormattedDate
@@ -64,15 +85,11 @@ export default defineComponent({
         const router = useRouter();
         const route = useRoute();
 
-        const app = getCurrentInstance();
-        const postLoader = app?.appContext.config.globalProperties.$postLoader as PostLoader;
+        const postLoader = usePostLoader();
 
         const post = ref<Post | null>(null);
         const content = ref<string | undefined>("");
-        const siblingSeriesPost = reactive({
-            next : {},
-            prev : {},
-        });
+        const siblingSeriesPost = reactive<ISiblingSeriesPost>({});
 
         const LoadPost = async (postId : number) => {
             post.value = postLoader.GetPostById(postId);
@@ -83,34 +100,43 @@ export default defineComponent({
                 });
             }
 
-            content.value = await post.value?.GetContent();
+            if (!post.value) {
+                console.warn("Can't found post!");
+                return;
+            }
 
-            if (post.value?.nextSeriesId)
+            content.value = await post.value.GetContent();
+
+            if (post.value.nextSeriesId)
             {
                 const nextPost = postLoader.GetPostById(post.value.nextSeriesId);
 
-                siblingSeriesPost.next = {
-                    id : nextPost?.uid,
-                    title : nextPost?.title
-                };
+                if (nextPost) {
+                    siblingSeriesPost.next = {
+                        id : nextPost.uid,
+                        title : nextPost.title
+                    };
+                }
             }
-            else
+            else 
             {
-                siblingSeriesPost.next = {};
+                siblingSeriesPost.next = undefined;
             }
 
-            if (post.value?.prevSeriesId)
+            if (post.value.prevSeriesId)
             {
                 const prevPost = postLoader.GetPostById(post.value.prevSeriesId);
 
-                siblingSeriesPost.prev = {
-                    id : prevPost?.uid,
-                    title : prevPost?.title
-                };
+                if (prevPost) {
+                    siblingSeriesPost.prev = {
+                        id : prevPost.uid,
+                        title : prevPost.title
+                    };
+                }
             }
-            else
+            else 
             {
-                siblingSeriesPost.prev = {};
+                siblingSeriesPost.prev = undefined;
             }
         }
 
@@ -126,7 +152,8 @@ export default defineComponent({
         return {
             post,
             content,
-            siblingSeriesPost
+            siblingSeriesPost,
+            router
         };
     },
 })
@@ -176,7 +203,7 @@ article {
     }
 }
 
-.series-navigator {
+.series-navigator-container {
     margin-top: 2rem;
 
     @include m-sm {

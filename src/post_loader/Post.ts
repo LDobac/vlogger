@@ -30,10 +30,18 @@ export default class Post
 
         if (this.seriesMeta)
         {
-            const index = this.seriesMeta.posts.findIndex(element => element === this.uid);
+            const posts = this.seriesMeta.posts;
 
-            this._nextPostId = this.seriesMeta.posts[index + 1] ?? null;
-            this._prevPostId = this.seriesMeta.posts[index - 1] ?? null;
+            if (posts.length > 0) 
+            {
+                const index = posts.findIndex(element => element === this.uid);
+
+                if (index > -1) 
+                {
+                    this._nextPostId = posts[index + 1] || null;
+                    this._prevPostId = posts[index - 1] || null;
+                }
+            }
         }
     }
 

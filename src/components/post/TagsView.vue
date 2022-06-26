@@ -11,7 +11,7 @@
                 },
             }"
         >
-            &#35;&nbsp;{{tag.name}}
+            {{tag.name}}
         </router-link>
     </div>
 </template>
@@ -52,8 +52,12 @@ button {
         margin-right: 10px;
         text-decoration: none;
 
-        @include m-sm {
+        @include m-md {
             font-size: 0.9rem;
+        }
+
+        @include m-sm {
+            font-size: 0.8rem;
         }
     }
 }

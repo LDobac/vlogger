@@ -34,10 +34,10 @@ interface PostMetadata
     htmlFileName : string;
 };
 
-interface PostFilter
+interface IPostFilter
 {
-    type : string,
-    id : number,
+    type : string;
+    id : number;
 }
 
 export {
@@ -46,5 +46,5 @@ export {
     PostMetadata,
     SeriesMetadata,
     TagsMetadata,
-    PostFilter
+    IPostFilter
 };

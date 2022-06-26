@@ -1,4 +1,4 @@
-import { PostFilter, PostMetadata, SeriesMetadata, TagsMetadata } from "./models";
+import { IPostFilter, PostMetadata, SeriesMetadata, TagsMetadata } from "./models";
 import Post from "./Post";
 
 export default class PostLoader 
@@ -46,7 +46,7 @@ export default class PostLoader
         return this._tagsMetadata;
     }
 
-    public GetRecentPosts(count = 10, offset = 0, filter : PostFilter | null = null) : Post[]
+    public GetRecentPosts(count = 10, offset = 0, filter : IPostFilter | null = null) : Post[]
     {
         let posts = this.postMetadatas
             .sort((a, b) => {

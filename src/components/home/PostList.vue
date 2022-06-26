@@ -10,25 +10,24 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, getCurrentInstance, PropType } from "vue";
-import PostLoader from "@/post_loader/PostLoader";
+import { computed, defineComponent, PropType } from "vue";
 import PostItem from "./PostItem.vue";
-import { PostFilter } from "@/post_loader/models";
+import { IPostFilter } from "@/post_loader/models";
+import { usePostLoader } from "@/composable/PostLoader";
 
 export default defineComponent({
     name: "PostList",
     props : {
         filter : {
-            type : Object as PropType<PostFilter>,
+            type : Object as PropType<IPostFilter | null>,
         }
     },
     components : { PostItem },
     setup(props) {
-        const app = getCurrentInstance();
-        const postLoader = app?.appContext.config.globalProperties.$postLoader as PostLoader;
+        const postLoader = usePostLoader();
 
         const posts = computed(() => {
-            if (props.filter?.type)
+            if (props.filter)
             {
                 return postLoader.GetRecentPosts(-1, 0, props.filter);
             }

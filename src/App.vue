@@ -29,31 +29,29 @@ body {
 
 #app {
     font-family: Roboto, "Noto Sans KR", Arial, Helvetica, sans-serif;
-
     width: 100%;
-
     display: grid;
     grid-template-areas: 
     "header header header"
     " . . . "
-    "side-m main     .   "
+    "   .     main   .   "
     " . . . "
     "footer footer footer";
-    grid-template-columns: 28fr minmax(0, 46fr) 26fr;
+    grid-template-columns: 20fr minmax(0, 60fr) 20fr;
     grid-template-rows: auto minmax(60px, auto) auto 60px 64px;
     align-items: flex-start;
-    justify-content: flex-start;
+    justify-items: center;
 
     @include m-xxl {
-        grid-template-columns: 27fr minmax(0, 62fr) 9fr;
+        grid-template-columns: 20fr minmax(0, 60fr) 20fr;
     }
 
     @include m-xl {
-        grid-template-columns: 25fr minmax(0, 58fr) 9fr;
+        grid-template-columns: 20fr minmax(0, 60fr) 20fr;
     }
 
     @include m-lg {
-        grid-template-columns: 28fr minmax(0, 70fr) 6fr;
+        grid-template-columns: 15fr minmax(0, 70fr) 15fr;
     }
 
     @include m-md {

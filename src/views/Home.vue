@@ -1,9 +1,9 @@
 <template>
-    <ContentWithSideMenu>
+    <div class="home">
         <div 
+            v-if="postFilter"
             :class="postFilter.type"
             class="post-filter"
-            v-if="postFilter.type"
         >
             <p>{{selectedFilterName}}</p>
         </div>
@@ -12,58 +12,64 @@
                 :filter="postFilter"
             />
         </main>
-    </ContentWithSideMenu>
+    </div>
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, getCurrentInstance, reactive, watch } from "vue";
+import { computed, defineComponent, ref, watch } from "vue";
 import { LocationQuery, useRoute } from "vue-router";
 
-import PostLoader from "@/post_loader/PostLoader";
-import { ContentWithSideMenu } from "@/components/layouts";
 import { PostList } from "@/components/home";
+import { usePostLoader } from "@/composable/PostLoader";
+import { IPostFilter } from "@/post_loader/models";
 
 export default defineComponent({
     name: "Home",
     components : {
         PostList,
-        ContentWithSideMenu,
     },
     setup() {
         const route = useRoute();
 
-        const postFilter = reactive({
-            type : "",
-            id : -1,
-        });
+        const postFilter = ref<IPostFilter | null>(null);
 
         const SetFilter = (query : LocationQuery) => {
-            if (query)
+            if ("series" in query || "tag" in query)
             {
                 const { series, tag } = query;
 
                 const type = series ? "series" : (tag ? "tag" : "");
                 const id = series ? parseInt(series as string) : (tag ? parseInt(tag as string) : -1);
 
-                postFilter.type = type;
-                postFilter.id = id;
+                postFilter.value = {
+                    type, id
+                };
+            }
+            else 
+            {
+                postFilter.value = null;
             }
         };
         SetFilter(route.query);
 
         watch(()=> route.query, SetFilter);
 
-        const app = getCurrentInstance();
-        const postLoader = app?.appContext.config.globalProperties.$postLoader as PostLoader;
+        const postLoader = usePostLoader();
 
         const selectedFilterName = computed(() => {
-            if (postFilter.type === "series")
+            if (postFilter.value) 
             {
-                return postLoader.seriesMetadata[postFilter.id].name;
-            }
-            else if (postFilter.type === "tag")
-            {
-                return postLoader.tagsMetadata[postFilter.id].name;
+                const type = postFilter.value.type
+                const id = postFilter.value.id;
+                
+                if (type === "series")
+                {
+                    return postLoader.seriesMetadata[id].name;
+                }
+                else if (type === "tag")
+                {
+                    return postLoader.tagsMetadata[id].name;
+                }
             }
 
             return "";

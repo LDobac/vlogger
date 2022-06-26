@@ -57,8 +57,8 @@ export default defineComponent({
     max-height: 200px;
     overflow: hidden;
 
-    width: 14vw;
-    height: 14vw;
+    width: 12vw;
+    height: 12vw;
 
     img {
         width: 100%;
@@ -69,7 +69,7 @@ export default defineComponent({
 }
 
 .title { 
-    font-size: 2rem;
+    font-size: 1.5rem;
     font-weight: bold;
     padding: 1rem 0;
 
@@ -84,17 +84,21 @@ export default defineComponent({
 
 .nav-menu {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
 
-    padding: 2rem 20%;
+    padding: 1.5rem 20%;
     font-weight: bold;
+
+    max-width: 1200px;
+    margin: auto;
 
     .nav-item:hover {
         color: var(--primary-color);
     }
 
     @include m-md {
-        padding: 2rem 0;
+        padding: 1.5rem 0;
+        justify-content: space-evenly;
     }
 }
 </style>

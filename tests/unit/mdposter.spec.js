@@ -1,4 +1,4 @@
-const fs = require("fs");
+// const fs = require("fs");
 const path = require("path");
 const { MDPoster } = require("../../md_poster/MDPoster");
 
@@ -25,8 +25,8 @@ describe("Unit test for MDPoster class", () => {
     });
 
     it("Test generate valid series", async () => {
-        const postsMeta = this.mdPoster.postsMeta;
-        const seriesMeta = this.mdPoster.seriesMeta;
+        // const postsMeta = this.mdPoster.postsMeta;
+        // const seriesMeta = this.mdPoster.seriesMeta;
 
         // expect(seriesMeta).toHaveLength(2);
     });

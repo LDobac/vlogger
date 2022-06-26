@@ -15,6 +15,8 @@ export default defineComponent({
 <style lang="scss" scoped>
 .footer {
     grid-area: footer;
+    width: 100%;
+    box-sizing: border-box;
 
     background-color: var(--bg-color);
     color: var(--primary-color);
