@@ -1,7 +1,7 @@
 <template>
     <header class="header">
         <div class="profile-image">
-            <img src="@/assets/images/profile_image.png" alt="My Profile Image">
+            <img src="@/assets/images/profile_image.webp" alt="My Profile Image">
         </div>
         <h1 class="title">
             <router-link to="/">
