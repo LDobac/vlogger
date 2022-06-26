@@ -5,7 +5,8 @@
             :class="postFilter.type"
             class="post-filter"
         >
-            <p>{{selectedFilterName}}</p>
+            <p class="type">{{postFilter.type[0].toUpperCase() + postFilter.type.slice(1)}}</p>
+            <p class="name">{{selectedFilterName}}</p>
         </div>
         <main class="home">
             <post-list 
@@ -99,19 +100,19 @@ export default defineComponent({
 
     text-align: center;
 
-    padding: 4rem;
-    margin-bottom: 6rem;
+    padding: 2rem 2rem 1rem 2rem;
+    margin-bottom: 2rem;
 
-    font-size: 3rem;
+    font-size: 2rem;
+    font-style: italic;
+    border-bottom: 1px solid var(--border-color);
+    color: white;
+    margin-top: -3rem;
 
-    &.series {
-        background: var(--series-primary-color);
-        color: white;
-    }
-
-    &.tag {
-        background: var(--tag-primary-color);
-        color: white;
+    .type {
+        font-size: 1rem;
+        font-style: normal;
+        margin-bottom: 0.5rem;
     }
 
     @include m-lg {
