@@ -1,5 +1,5 @@
 const marked = require("marked");
-const moment = require("moment");
+const dayjs = require("dayjs");
 const YAML = require("yaml");
 const { MDNoMetadata } = require("./MDExceptions");
 
@@ -104,7 +104,7 @@ class MDBuilder
         postData.content = renderedHTML;
         postData.summery = parsedMetadata.summery ?? "";
         postData.thumbnail = parsedMetadata.thumbnail ?? "";
-        postData.date = moment(parsedMetadata.date).toISOString(true) ?? moment().toISOString(true);
+        postData.date = dayjs(parsedMetadata.date).toISOString(true) ?? dayjs().toISOString(true);
         postData.seriesName = parsedMetadata.series ?? "";
         postData.tags = parsedMetadata.tags ?? [];
 

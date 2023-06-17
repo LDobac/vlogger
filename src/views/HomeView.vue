@@ -24,7 +24,7 @@ import { ContentWithSideMenu } from "@/components/layouts";
 import { PostList } from "@/components/home";
 
 export default defineComponent({
-    name: "Home",
+    name: "HomeView",
     components : {
         PostList,
         ContentWithSideMenu,

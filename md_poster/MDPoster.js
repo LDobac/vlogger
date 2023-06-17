@@ -1,6 +1,6 @@
 const fs = require("fs/promises");
 const path = require("path");
-const moment = require("moment");
+const dayjs = require("dayjs");
 const replaceExt = require("replace-ext");
 const { MDBuilder, MDPostData } = require("./MDBuilder");
 const { MDNotValidData } = require("./MDExceptions");
@@ -84,8 +84,8 @@ class MDPoster
         }
 
         const timeSortFunc = (a, b) => {
-            const dateA = moment(a.date);
-            const dateB = moment(b.date);
+            const dateA = dayjs(a.date);
+            const dateB = dayjs(b.date);
 
             if (dateA.isSame(dateB))
             {
