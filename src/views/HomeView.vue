@@ -25,7 +25,7 @@ import { usePostLoader } from "@/composable/PostLoader";
 import { IPostFilter } from "@/post_loader/models";
 
 export default defineComponent({
-    name: "Home",
+    name: "HomeView",
     components : {
         PostList,
     },

@@ -32,3 +32,8 @@ yarn lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+
+# TODO
+[] migrete yarn version 2
+[] update packages

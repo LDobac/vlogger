@@ -1,19 +1,11 @@
 <template>
-    <Header />
+    <DefaultHeader />
     <router-view/>
-    <Footer />
+    <DefaultFooter />
 </template>
 
-<script lang="ts">
-import { Header, Footer } from "@/components/";
-import { defineComponent } from "vue";
-
-export default defineComponent({
-    components : {
-        Header,
-        Footer,
-    },
-});
+<script setup lang="ts">
+import { DefaultHeader, DefaultFooter } from "@/components/";
 </script>
 
 
