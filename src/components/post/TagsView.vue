@@ -16,21 +16,12 @@
     </div>
 </template>
 
-<script lang="ts">
-import { Tag } from "@/post_loader/models";
-import { defineComponent, PropType } from "vue";
+<script setup lang="ts">
+import type { Tag } from "@/post_loader/models";
+import { toRef } from "vue";
 
-export default defineComponent({
-    name : "TagsView",
-    props : {
-        tags : {
-            type : Object as PropType<Tag[]>
-        }
-    },
-    setup() {
-        //
-    },
-})
+const props = defineProps<{tags: Tag[]}>();
+const tags = toRef(props.tags);
 </script>
 
 <style lang="scss" scoped>

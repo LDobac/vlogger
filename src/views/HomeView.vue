@@ -16,71 +16,58 @@
     </div>
 </template>
 
-<script lang="ts">
-import { computed, defineComponent, ref, watch } from "vue";
+<script setup lang="ts">
+import { computed, ref, watch } from "vue";
 import { LocationQuery, useRoute } from "vue-router";
 
 import { PostList } from "@/components/home";
 import { usePostLoader } from "@/composable/PostLoader";
-import { IPostFilter } from "@/post_loader/models";
+import type { IPostFilter } from "@/post_loader/models";
 
-export default defineComponent({
-    name: "HomeView",
-    components : {
-        PostList,
-    },
-    setup() {
-        const route = useRoute();
+const route = useRoute();
 
-        const postFilter = ref<IPostFilter | null>(null);
+const postFilter = ref<IPostFilter | null>(null);
 
-        const SetFilter = (query : LocationQuery) => {
-            if ("series" in query || "tag" in query)
-            {
-                const { series, tag } = query;
+const SetFilter = (query : LocationQuery) => {
+    if ("series" in query || "tag" in query)
+    {
+        const { series, tag } = query;
 
-                const type = series ? "series" : (tag ? "tag" : "");
-                const id = series ? parseInt(series as string) : (tag ? parseInt(tag as string) : -1);
+        const type = series ? "series" : (tag ? "tag" : "");
+        const id = series ? parseInt(series as string) : (tag ? parseInt(tag as string) : -1);
 
-                postFilter.value = {
-                    type, id
-                };
-            }
-            else 
-            {
-                postFilter.value = null;
-            }
+        postFilter.value = {
+            type, id
         };
-        SetFilter(route.query);
+    }
+    else 
+    {
+        postFilter.value = null;
+    }
+};
 
-        watch(()=> route.query, SetFilter);
+SetFilter(route.query);
+watch(()=> route.query, SetFilter);
 
-        const postLoader = usePostLoader();
+const postLoader = usePostLoader();
 
-        const selectedFilterName = computed(() => {
-            if (postFilter.value) 
-            {
-                const type = postFilter.value.type
-                const id = postFilter.value.id;
-                
-                if (type === "series")
-                {
-                    return postLoader.seriesMetadata[id].name;
-                }
-                else if (type === "tag")
-                {
-                    return postLoader.tagsMetadata[id].name;
-                }
-            }
-
-            return "";
-        });
-
-        return {
-            postFilter,
-            selectedFilterName
+const selectedFilterName = computed(() => {
+    if (postFilter.value) 
+    {
+        const type = postFilter.value.type;
+        const id = postFilter.value.id;
+        
+        if (type === "series")
+        {
+            return postLoader.seriesMetadata[id].name;
         }
-    },
+        else if (type === "tag")
+        {
+            return postLoader.tagsMetadata[id].name;
+        }
+    }
+
+    return "";
 });
 </script>
 

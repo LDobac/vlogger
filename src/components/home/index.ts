@@ -4,4 +4,4 @@ import PostList from "@/components/home/PostList.vue";
 export {
     PostItem,
     PostList,
-}
+};

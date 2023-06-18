@@ -43,8 +43,8 @@
     </div>
 </template>
 
-<script lang="ts">
-import { defineComponent, onMounted, reactive, ref, watch } from "vue";
+<script setup lang="ts">
+import { onMounted, reactive, ref, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
 
 import "highlight.js/styles/base16/google-light.css";
@@ -68,92 +68,74 @@ export interface ISiblingSeriesPost {
     };
 }
 
-export default defineComponent({
-    name: "PostView",
-    components : {
-        TagsView,
-        SeriesButton,
-        SeriesNavigator,
-        FormattedDate
-    },
-    setup() {
-        // Set hightlight.js
-        onMounted(() => {
-            hljs.highlightAll();
+// Set hightlight.js
+onMounted(() => {
+    hljs.highlightAll();
+});
+
+const router = useRouter();
+const route = useRoute();
+
+const postLoader = usePostLoader();
+
+const post = ref<Post | null>(null);
+const content = ref<string | undefined>("");
+const siblingSeriesPost = reactive<ISiblingSeriesPost>({});
+
+const LoadPost = async (postId : number) => {
+    post.value = postLoader.GetPostById(postId);
+    if (!post.value)
+    {
+        router.push({
+            name: "NotFound",
         });
 
-        const router = useRouter();
-        const route = useRoute();
+        return;
+    }
 
-        const postLoader = usePostLoader();
+    content.value = await post.value.GetContent();
 
-        const post = ref<Post | null>(null);
-        const content = ref<string | undefined>("");
-        const siblingSeriesPost = reactive<ISiblingSeriesPost>({});
+    if (post.value.nextSeriesId)
+    {
+        const nextPost = postLoader.GetPostById(post.value.nextSeriesId);
 
-        const LoadPost = async (postId : number) => {
-            post.value = postLoader.GetPostById(postId);
-            if (!post.value)
-            {
-                router.push({
-                    name: "NotFound",
-                });
-
-                return;
-            }
-
-            content.value = await post.value.GetContent();
-
-            if (post.value.nextSeriesId)
-            {
-                const nextPost = postLoader.GetPostById(post.value.nextSeriesId);
-
-                if (nextPost) {
-                    siblingSeriesPost.next = {
-                        id : nextPost.uid,
-                        title : nextPost.title
-                    };
-                }
-            }
-            else 
-            {
-                siblingSeriesPost.next = undefined;
-            }
-
-            if (post.value.prevSeriesId)
-            {
-                const prevPost = postLoader.GetPostById(post.value.prevSeriesId);
-
-                if (prevPost) {
-                    siblingSeriesPost.prev = {
-                        id : prevPost.uid,
-                        title : prevPost.title
-                    };
-                }
-            }
-            else 
-            {
-                siblingSeriesPost.prev = undefined;
-            }
+        if (nextPost) {
+            siblingSeriesPost.next = {
+                id : nextPost.uid,
+                title : nextPost.title
+            };
         }
+    }
+    else 
+    {
+        siblingSeriesPost.next = undefined;
+    }
 
-        watch(() => route.params.id, (value) => {
-            if (value)
-            {
-                LoadPost(parseInt(route.params.id as string));
-            }
-        });
+    if (post.value.prevSeriesId)
+    {
+        const prevPost = postLoader.GetPostById(post.value.prevSeriesId);
 
+        if (prevPost) {
+            siblingSeriesPost.prev = {
+                id : prevPost.uid,
+                title : prevPost.title
+            };
+        }
+    }
+    else 
+    {
+        siblingSeriesPost.prev = undefined;
+    }
+};
+
+watch(() => route.params.id, (value) => {
+    if (value)
+    {
         LoadPost(parseInt(route.params.id as string));
+    }
+});
 
-        return {
-            post,
-            content,
-            siblingSeriesPost,
-            router
-        };
-    },
-})
+LoadPost(parseInt(route.params.id as string));
 </script>
 
 <style lang="scss">

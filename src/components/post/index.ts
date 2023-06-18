@@ -6,4 +6,4 @@ export {
     TagsView,
     SeriesButton,
     SeriesNavigator
-}
+};

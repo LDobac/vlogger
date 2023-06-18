@@ -15,17 +15,12 @@
     </span>
 </template>
 
-<script lang="ts">
-import { Series } from "@/post_loader/models";
-import { defineComponent, PropType } from "vue";
+<script setup lang="ts">
+import type { Series } from "@/post_loader/models";
+import { toRef } from "vue";
 
-export default defineComponent({
-    props : {
-        series : {
-            type : Object as PropType<Series>
-        }
-    }
-})
+const props = defineProps<{series: Series}>();
+const series = toRef(props.series);
 </script>
 
 

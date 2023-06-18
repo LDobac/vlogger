@@ -7,7 +7,7 @@ module.exports = {
                 args[0].title = "Jaehee.dev";
 
                 return args;
-            })
+            });
     },
     css : {
         loaderOptions : {

@@ -9,38 +9,25 @@
     </div>
 </template>
 
-<script lang="ts">
-import { computed, defineComponent, PropType } from "vue";
+<script setup lang="ts">
+import { computed } from "vue";
 import PostItem from "./PostItem.vue";
 import { IPostFilter } from "@/post_loader/models";
 import { usePostLoader } from "@/composable/PostLoader";
 
-export default defineComponent({
-    name: "PostList",
-    props : {
-        filter : {
-            type : Object as PropType<IPostFilter | null>,
-        }
-    },
-    components : { PostItem },
-    setup(props) {
-        const postLoader = usePostLoader();
+const props = defineProps<{filter: IPostFilter | null}>();
 
-        const posts = computed(() => {
-            if (props.filter)
-            {
-                return postLoader.GetRecentPosts(-1, 0, props.filter);
-            }
-            else
-            {
-                return postLoader.GetRecentPosts(-1);
-            }
-        });
+const postLoader = usePostLoader();
 
-        return {
-            posts,
-        }
-    },
+const posts = computed(() => {
+    if (props.filter)
+    {
+        return postLoader.GetRecentPosts(-1, 0, props.filter);
+    }
+    else
+    {
+        return postLoader.GetRecentPosts(-1);
+    }
 });
 </script>
 

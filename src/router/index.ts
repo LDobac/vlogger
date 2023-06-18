@@ -18,7 +18,7 @@ const routes: Array<RouteRecordRaw> = [
     {
         path: "/post/:id(\\d+)",
         name: "PostView",
-        component: () => import(/* webpackChunkName: "post_view" */ "../views/post/view.vue"),
+        component: () => import(/* webpackChunkName: "post_view" */ "../views/post/PostView.vue"),
     },
     {
         path: "/:pathMatch(.*)*",
@@ -45,7 +45,7 @@ const router = createRouter({
             return {
                 el: to.hash,
                 behavior: "smooth",
-            }
+            };
         }
         else 
         {

@@ -35,8 +35,8 @@
     </div>
 </template>
 
-<script lang="ts" setup>
-import { ISiblingSeriesPost } from "@/views/post/view.vue";
+<script setup lang="ts">
+import type { ISiblingSeriesPost } from "@/views/post/PostView.vue";
 
 const props = defineProps<{
     siblingSeriesPost : ISiblingSeriesPost

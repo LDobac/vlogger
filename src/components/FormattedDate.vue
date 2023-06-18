@@ -2,33 +2,23 @@
     <p class="date">&#x1F4C5; {{formattedDate}}</p>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 import dayjs from "dayjs";
-import { computed, defineComponent, PropType, toRefs } from "vue";
+import { computed, toRefs } from "vue";
 
-export default defineComponent({
-    name : "FormattedDate",
-    props : {
-        date : {
-            type : [String, Object] as PropType<string | dayjs.Dayjs>,
-        }
-    },
-    setup(props) {
-        const { date } = toRefs(props);
+const props = defineProps<{date: string | dayjs.Dayjs}>();
 
-        const formattedDate = computed(() => {
-            if (typeof date.value == "string")
-            {
-                return dayjs(date.value).format("YYYY년 MM월 DD일");
-            }
+const { date } = toRefs(props);
 
-            return (date.value as dayjs.Dayjs).format("YYYY년 MM월 DD일");
-        });
+const formatString = "YYYY년 MM월 DD일";
 
-        return {
-            formattedDate,
-        };
-    },
+const formattedDate = computed(() => {
+    if (typeof date.value === "string")
+    {
+        return dayjs(date.value).format(formatString);
+    }
+
+    return (date.value as dayjs.Dayjs).format(formatString);
 });
 </script>
 

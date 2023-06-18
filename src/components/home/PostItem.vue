@@ -35,27 +35,15 @@
     </router-link>
 </template>
 
-<script lang="ts">
-import { defineComponent, PropType } from "vue";
-import Post from "@/post_loader/Post";
+<script setup lang="ts">
+import type Post from "@/post_loader/Post";
 
 import { FormattedDate } from "@/components";
 import { TagsView, SeriesButton } from "@/components/post";
+import { toRef } from "vue";
 
-export default defineComponent({
-    name: "PostItem",
-    components : {
-        TagsView,
-        SeriesButton,
-        FormattedDate
-    },
-    props : {
-        post : {
-            type : Object as PropType<Post>,
-            required : true,
-        }
-    },
-});
+const props = defineProps<{post: Post}>();
+const post = toRef(props.post);
 </script>
 
 <style lang="scss" scoped>
