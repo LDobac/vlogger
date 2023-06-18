@@ -52,7 +52,7 @@ import hljs from "highlight.js/lib/common";
 
 import "github-markdown-css";
 
-import { Date as FormattedDate } from "@/components";
+import { FormattedDate } from "@/components";
 import { TagsView, SeriesButton, SeriesNavigator } from "@/components/post";
 import Post from "@/post_loader/Post";
 import { usePostLoader } from "@/composable/PostLoader";
@@ -98,10 +98,7 @@ export default defineComponent({
                 router.push({
                     name: "NotFound",
                 });
-            }
 
-            if (!post.value) {
-                console.warn("Can't found post!");
                 return;
             }
 

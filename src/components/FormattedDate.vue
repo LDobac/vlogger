@@ -29,7 +29,7 @@ export default defineComponent({
             formattedDate,
         };
     },
-})
+});
 </script>
 
 <style lang="scss" scoped>

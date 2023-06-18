@@ -36,7 +36,6 @@
 </template>
 
 <script lang="ts" setup>
-import { defineProps } from "vue";
 import { ISiblingSeriesPost } from "@/views/post/view.vue";
 
 const props = defineProps<{

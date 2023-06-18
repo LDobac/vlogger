@@ -16,7 +16,7 @@ postLoader.LoadMetadatas().then(() => {
     
     app.use(router);
     app.use(VueGtag, {
-        property : {
+        config : {
             id : "G-BLG37NTK4J",
         }
     }, router);

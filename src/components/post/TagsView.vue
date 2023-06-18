@@ -28,13 +28,7 @@ export default defineComponent({
         }
     },
     setup() {
-        const onButtonClick = (index : number) => {
-            console.log(index);
-        };
-
-        return {
-            onButtonClick,
-        }
+        //
     },
 })
 </script>

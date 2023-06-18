@@ -1,11 +1,9 @@
 import DefaultHeader from "@/components/DefaultHeader.vue";
 import DefaultFooter from "@/components/DefaultFooter.vue";
-import LeftSideMenu from "@/components/LeftSideMenu.vue";
-import Date from "@/components/Date.vue";
+import FormattedDate from "@/components/FormattedDate.vue";
 
 export {
     DefaultHeader,
     DefaultFooter,
-    LeftSideMenu,
-    Date
+    FormattedDate
 };

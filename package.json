@@ -17,6 +17,7 @@
     "github-markdown-css": "^5.2.0",
     "highlight.js": "^11.8.0",
     "vue": "^3.3.4",
+    "vue-gtag": "^2.0.1",
     "vue-router": "^4.2.2"
   },
   "devDependencies": {

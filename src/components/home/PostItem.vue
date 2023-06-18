@@ -39,7 +39,7 @@
 import { defineComponent, PropType } from "vue";
 import Post from "@/post_loader/Post";
 
-import { Date as FormattedDate } from "@/components";
+import { FormattedDate } from "@/components";
 import { TagsView, SeriesButton } from "@/components/post";
 
 export default defineComponent({
