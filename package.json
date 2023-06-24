@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "node ./scripts/BuildPosts.js && vue-cli-service build",
-    "build:posts": "node ./scripts/BuildPosts.js",
+    "build": "vue-cli-service build",
+    "posts": "node ./scripts/BuildPosts.js",
     "test:unit": "vue-cli-service test:unit",
     "test:e2e": "vue-cli-service test:e2e",
     "lint": "vue-cli-service lint",

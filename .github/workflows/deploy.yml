@@ -31,7 +31,7 @@ jobs:
         run: yarn install
         
       - name: Build Posts
-        run: yarn build:posts
+        run: yarn posts
         env:
           TZ: Asia/Seoul
       
