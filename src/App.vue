@@ -30,16 +30,16 @@ body {
     " . . . "
     "footer footer footer";
     grid-template-columns: 20fr minmax(0, 60fr) 20fr;
-    grid-template-rows: auto minmax(60px, auto) auto 60px 64px;
+    grid-template-rows: auto minmax(40px, auto) auto 60px 64px;
     align-items: flex-start;
     justify-items: center;
 
     @include m-xxl {
-        grid-template-columns: 20fr minmax(0, 60fr) 20fr;
+        grid-template-columns: 15fr minmax(0, 70fr) 15fr;
     }
 
     @include m-xl {
-        grid-template-columns: 20fr minmax(0, 60fr) 20fr;
+        grid-template-columns: 15fr minmax(0, 70fr) 15fr;
     }
 
     @include m-lg {

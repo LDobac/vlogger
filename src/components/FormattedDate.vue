@@ -1,5 +1,5 @@
 <template>
-    <p class="date">&#x1F4C5; {{formattedDate}}</p>
+    <p class="date">{{formattedDate}}</p>
 </template>
 
 <script setup lang="ts">
@@ -24,6 +24,8 @@ const formattedDate = computed(() => {
 
 <style lang="scss" scoped>
 .date {
+    color: #000000ab;
+
     @include m-sm {
         font-size: 0.9rem;
     }

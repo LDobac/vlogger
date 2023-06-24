@@ -3,16 +3,16 @@
         <div class="post-container" v-if="post">
             <div class="card content">
                 <div class="title-wrap">
+                    <TagsView 
+                        class="tags"
+                        :tags="post.tags" 
+                    />
                     <h1 class="title">
                         {{post.title}}
                         <SeriesButton v-if="post.series" :series="post.series"/>
                     </h1>
                     <FormattedDate 
                         :date="post.date"
-                    />
-                    <TagsView 
-                        class="tags"
-                        :tags="post.tags" 
                     />
                 </div>
                 <article 
@@ -147,13 +147,16 @@ LoadPost(parseInt(route.params.id as string));
     .content {
         .title-wrap {
             border-bottom: 1px solid black;
-            padding-bottom: 1rem;
+            padding-bottom: 2rem;
 
             .title {
                 font-size: 3rem;
                 font-weight: bold;
 
-                margin-bottom: 0.5rem;
+                margin-top: 0.5rem;
+                margin-bottom: 1.5rem;
+
+                line-height: 0.75;
 
                 @include m-sm {
                     font-size: 2rem;
@@ -161,7 +164,7 @@ LoadPost(parseInt(route.params.id as string));
             }
 
             .tags {
-                padding-top: 1rem;
+                padding-bottom: 1rem;
             }
         }
 
@@ -174,7 +177,7 @@ LoadPost(parseInt(route.params.id as string));
 
 article {
     font-family: inherit !important;
-    padding-top: 2rem;
+    padding-top: 3rem;
 
     img {
         max-width: 100%;
