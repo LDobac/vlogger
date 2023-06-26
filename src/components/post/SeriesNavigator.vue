@@ -1,46 +1,100 @@
 <template>
     <div 
         class="series-navigator"
-        v-if="props.siblingSeriesPost"
+        v-if="siblingSeriesPost"
     >
         <router-link 
-            v-if="props.siblingSeriesPost.prev"
+            v-if="siblingSeriesPost.prev"
             class="prev-button series-button"
             :to="{
                 name : 'PostView', 
                 params : {
-                    id : props.siblingSeriesPost.prev.id
+                    id : siblingSeriesPost.prev.id
                 }
             }"
         >
             <p class="bold">이전</p>
-            {{props.siblingSeriesPost.prev.title}}
+            {{siblingSeriesPost.prev.title}}
         </router-link>
         <div v-else></div>
 
         <router-link 
-            v-if="props.siblingSeriesPost.next"
+            v-if="siblingSeriesPost.next"
             class="next-button series-button"
             :to="{
                 name : 'PostView', 
                 params : {
-                    id : props.siblingSeriesPost.next.id
+                    id : siblingSeriesPost.next.id
                 }
             }"
         >
             <p class="bold">다음</p>
-            {{props.siblingSeriesPost.next.title}}
+            {{siblingSeriesPost.next.title}}
         </router-link>
         <div v-else></div>
     </div>
 </template>
 
 <script setup lang="ts">
-import type { ISiblingSeriesPost } from "@/views/post/PostView.vue";
+import { reactive, watch } from "vue";
+import { usePostLoader } from "@/composable/PostLoader";
+import type Post from "@/post_loader/Post";
 
-const props = defineProps<{
-    siblingSeriesPost : ISiblingSeriesPost
-}>();
+interface ISiblingSeriesPost {
+    next? : {
+        id: number;
+        title: string;
+    };
+    prev? : {
+        id: number;
+        title: string;
+    };
+}
+
+const props = defineProps<{post: Post}>();
+
+const siblingSeriesPost = reactive<ISiblingSeriesPost>({});
+
+const postLoader = usePostLoader();
+
+const LoadSiblingPosts = () => {
+    if (props.post.nextSeriesId)
+    {
+        const nextPost = postLoader.GetPostById(props.post.nextSeriesId);
+    
+        if (nextPost) {
+            siblingSeriesPost.next = {
+                id : nextPost.uid,
+                title : nextPost.title
+            };
+        }
+    }
+    else 
+    {
+        siblingSeriesPost.next = undefined;
+    }
+    
+    if (props.post.prevSeriesId)
+    {
+        const prevPost = postLoader.GetPostById(props.post.prevSeriesId);
+    
+        if (prevPost) {
+            siblingSeriesPost.prev = {
+                id : prevPost.uid,
+                title : prevPost.title
+            };
+        }
+    }
+    else 
+    {
+        siblingSeriesPost.prev = undefined;
+    }
+};
+
+LoadSiblingPosts();
+watch(() => props.post, () => {
+    LoadSiblingPosts();
+});
 </script>
 
 <style lang="scss" scoped>

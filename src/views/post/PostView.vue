@@ -23,7 +23,7 @@
             <div class="series-navigator-container">
                 <SeriesNavigator 
                     v-if="post.series"
-                    :siblingSeriesPost="siblingSeriesPost"
+                    :post="post as Post"
                 />
             </div>
         </div>
@@ -44,7 +44,7 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, reactive, ref, watch } from "vue";
+import { onMounted, ref, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
 
 import "highlight.js/styles/base16/google-light.css";
@@ -56,17 +56,6 @@ import { FormattedDate } from "@/components";
 import { TagsView, SeriesButton, SeriesNavigator } from "@/components/post";
 import Post from "@/post_loader/Post";
 import { usePostLoader } from "@/composable/PostLoader";
-
-export interface ISiblingSeriesPost {
-    next? : {
-        id: number;
-        title: string;
-    };
-    prev? : {
-        id: number;
-        title: string;
-    };
-}
 
 // Set hightlight.js
 onMounted(() => {
@@ -80,7 +69,6 @@ const postLoader = usePostLoader();
 
 const post = ref<Post | null>(null);
 const content = ref<string | undefined>("");
-const siblingSeriesPost = reactive<ISiblingSeriesPost>({});
 
 const LoadPost = async (postId : number) => {
     post.value = postLoader.GetPostById(postId);
@@ -94,38 +82,6 @@ const LoadPost = async (postId : number) => {
     }
 
     content.value = await post.value.GetContent();
-
-    if (post.value.nextSeriesId)
-    {
-        const nextPost = postLoader.GetPostById(post.value.nextSeriesId);
-
-        if (nextPost) {
-            siblingSeriesPost.next = {
-                id : nextPost.uid,
-                title : nextPost.title
-            };
-        }
-    }
-    else 
-    {
-        siblingSeriesPost.next = undefined;
-    }
-
-    if (post.value.prevSeriesId)
-    {
-        const prevPost = postLoader.GetPostById(post.value.prevSeriesId);
-
-        if (prevPost) {
-            siblingSeriesPost.prev = {
-                id : prevPost.uid,
-                title : prevPost.title
-            };
-        }
-    }
-    else 
-    {
-        siblingSeriesPost.prev = undefined;
-    }
 };
 
 watch(() => route.params.id, (value) => {
@@ -155,8 +111,6 @@ LoadPost(parseInt(route.params.id as string));
 
                 margin-top: 0.5rem;
                 margin-bottom: 1.5rem;
-
-                line-height: 0.75;
 
                 @include m-sm {
                     font-size: 2rem;
