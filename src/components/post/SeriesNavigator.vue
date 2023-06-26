@@ -1,93 +1,62 @@
 <template>
-    <div 
+    <div
         class="series-navigator"
-        v-if="siblingSeriesPost"
+        v-if="nextPost || prevPost"
     >
-        <router-link 
-            v-if="siblingSeriesPost.prev"
-            class="prev-button series-button"
-            :to="{
-                name : 'PostView', 
-                params : {
-                    id : siblingSeriesPost.prev.id
-                }
-            }"
-        >
-            <p class="bold">이전</p>
-            {{siblingSeriesPost.prev.title}}
-        </router-link>
-        <div v-else></div>
+        <div class="link">
+            <SeriesNavigatorButton
+                v-if="prevPost"
+                class="navigator-button"
+                :post="prevPost as Post"
+            >
+                <i>&#10140;</i>
+                <span>{{prevPost.title}}</span>
+            </SeriesNavigatorButton>
+            <div v-else></div>
 
-        <router-link 
-            v-if="siblingSeriesPost.next"
-            class="next-button series-button"
-            :to="{
-                name : 'PostView', 
-                params : {
-                    id : siblingSeriesPost.next.id
-                }
-            }"
-        >
-            <p class="bold">다음</p>
-            {{siblingSeriesPost.next.title}}
-        </router-link>
-        <div v-else></div>
+            <SeriesNavigatorButton
+                v-if="nextPost"
+                class="navigator-button"
+                :post="nextPost as Post"
+            >
+                <span>{{nextPost.title}}</span>
+                <i>&#10140;</i>
+            </SeriesNavigatorButton>
+            <div v-else></div>
+        </div>
     </div>
 </template>
 
 <script setup lang="ts">
-import { reactive, watch } from "vue";
+import { ref, watch } from "vue";
 import { usePostLoader } from "@/composable/PostLoader";
+import { SeriesNavigatorButton } from ".";
 import type Post from "@/post_loader/Post";
-
-interface ISiblingSeriesPost {
-    next? : {
-        id: number;
-        title: string;
-    };
-    prev? : {
-        id: number;
-        title: string;
-    };
-}
 
 const props = defineProps<{post: Post}>();
 
-const siblingSeriesPost = reactive<ISiblingSeriesPost>({});
+const nextPost = ref<Post | null>(null);
+const prevPost = ref<Post | null>(null);
 
 const postLoader = usePostLoader();
 
 const LoadSiblingPosts = () => {
     if (props.post.nextSeriesId)
     {
-        const nextPost = postLoader.GetPostById(props.post.nextSeriesId);
-    
-        if (nextPost) {
-            siblingSeriesPost.next = {
-                id : nextPost.uid,
-                title : nextPost.title
-            };
-        }
+        nextPost.value = postLoader.GetPostById(props.post.nextSeriesId);
     }
-    else 
+    else
     {
-        siblingSeriesPost.next = undefined;
+        nextPost.value = null;
     }
-    
+
     if (props.post.prevSeriesId)
     {
-        const prevPost = postLoader.GetPostById(props.post.prevSeriesId);
-    
-        if (prevPost) {
-            siblingSeriesPost.prev = {
-                id : prevPost.uid,
-                title : prevPost.title
-            };
-        }
+        prevPost.value = postLoader.GetPostById(props.post.prevSeriesId);
     }
-    else 
+    else
     {
-        siblingSeriesPost.prev = undefined;
+        prevPost.value = null;
     }
 };
 
@@ -98,62 +67,40 @@ watch(() => props.post, () => {
 </script>
 
 <style lang="scss" scoped>
-.series-navigator {
+.link {
     display: flex;
     justify-content: space-between;
 }
 
-.series-button {
-    width: 30%;
-    min-width: 200px;
-    max-width: 360px;
-    padding: 16px 0;
-    background: white;
-    font-size: 1rem;
-    border-radius: 12px;
-    border: 1px solid var(--primary-color);
-    text-decoration: none;
-    color: black;
+.navigator-button {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
 
-    .bold {
-        font-weight: bold;
-        font-size: 0.8rem;
-        margin-bottom: 0.25rem;
+    i {
+        font-size: 32px;
     }
 
-    &:hover {
-        color: white;
-        background-color: var(--series-primary-color);
+    span {
+        text-wrap: balance;
+        word-wrap: break-word;
     }
 
-    &.prev-button {
-        text-align: left;
-        padding-left: 40px;
+    &:first-of-type {
+        i {
+            transform: rotate(180deg);
+        }
 
-        @include m-sm {
-            padding-left: 16px;
+        span {
+            text-align: right;
         }
     }
 
-    &.next-button {
-        text-align: right;
-        padding-right: 40px;
-
-        @include m-sm {
-            padding-right: 16px;
+    &:last-of-type {
+        span {
+            text-align: left;
         }
-    }
-
-    @include m-sm {
-        min-width: unset;
-        max-width: unset;
-
-        width: 40%;
-        font-size: 1.1rem;
-
-        padding: 8px 0;
     }
 }
-
-
 </style>

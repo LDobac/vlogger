@@ -18,7 +18,7 @@
                 <div class="info">
                     <h1 class="post-title">
                         {{post.title}}
-                        <SeriesButton v-if="post.series" :series="post.series"/>
+                        <SeriesLink v-if="post.series" :series="post.series"/>
                     </h1>
                     <FormattedDate 
                         :date="post.date"
@@ -39,7 +39,7 @@
 import type Post from "@/post_loader/Post";
 
 import { FormattedDate } from "@/components";
-import { TagsView, SeriesButton } from "@/components/post";
+import { TagsView, SeriesLink } from "@/components/post";
 import { toRef } from "vue";
 
 const props = defineProps<{post: Post}>();

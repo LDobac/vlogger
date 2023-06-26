@@ -9,7 +9,7 @@
                     />
                     <h1 class="title">
                         {{post.title}}
-                        <SeriesButton v-if="post.series" :series="post.series"/>
+                        <SeriesLink v-if="post.series" :series="post.series"/>
                     </h1>
                     <FormattedDate 
                         :date="post.date"
@@ -21,7 +21,7 @@
             </div>
 
             <div class="series-navigator-container">
-                <SeriesNavigator 
+                <SeriesNavigator
                     v-if="post.series"
                     :post="post as Post"
                 />
@@ -53,7 +53,7 @@ import hljs from "highlight.js/lib/common";
 import "github-markdown-css";
 
 import { FormattedDate } from "@/components";
-import { TagsView, SeriesButton, SeriesNavigator } from "@/components/post";
+import { TagsView, SeriesLink, SeriesNavigator } from "@/components/post";
 import Post from "@/post_loader/Post";
 import { usePostLoader } from "@/composable/PostLoader";
 

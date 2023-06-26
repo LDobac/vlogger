@@ -1,10 +1,10 @@
 <template>
     <span 
-        class="series-wrap"
+        class="series-link-wrap"
         v-if="series"
     >
         <router-link 
-            class="series" 
+            class="series-link" 
             :to="{
                 path : '/',
                 query : {
@@ -25,10 +25,10 @@ const series = toRef(props.series);
 
 
 <style lang="scss" scoped>
-.series-wrap {
+.series-link-wrap {
     font-size: 1rem;
     
-    .series {
+    .series-link {
         font-weight: bold;
         color: var(--primary-color);
         text-decoration: none;

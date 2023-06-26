@@ -1,9 +1,11 @@
 import TagsView from "./TagsView.vue";
-import SeriesButton from "./SeriesButton.vue";
+import SeriesLink from "./SeriesLink.vue";
 import SeriesNavigator from "./SeriesNavigator.vue";
+import SeriesNavigatorButton from "./SeriesNavigatorButton.vue";
 
 export {
     TagsView,
-    SeriesButton,
-    SeriesNavigator
+    SeriesLink,
+    SeriesNavigator,
+    SeriesNavigatorButton,
 };
