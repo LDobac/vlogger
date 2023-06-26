@@ -3,6 +3,11 @@
         class="series-navigator"
         v-if="nextPost || prevPost"
     >
+        <div class="info">
+            <SeriesLink class="series-link" :series="((prevPost ?? nextPost) as Post).series as Series"/>
+            <span>&nbsp;시리즈의 다른 게시물도 확인해보세요!</span>
+        </div>
+    
         <div class="link">
             <SeriesNavigatorButton
                 v-if="prevPost"
@@ -30,8 +35,9 @@
 <script setup lang="ts">
 import { ref, watch } from "vue";
 import { usePostLoader } from "@/composable/PostLoader";
-import { SeriesNavigatorButton } from ".";
+import { SeriesLink, SeriesNavigatorButton } from ".";
 import type Post from "@/post_loader/Post";
+import type { Series } from "@/post_loader/models";
 
 const props = defineProps<{post: Post}>();
 
@@ -67,6 +73,19 @@ watch(() => props.post, () => {
 </script>
 
 <style lang="scss" scoped>
+.info {
+    background: white;
+    border-radius: 12px;
+    padding: 16px;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    text-align: center;
+
+    .series-link {
+        font-size: 1.3rem;
+    }
+}
+
 .link {
     display: flex;
     justify-content: space-between;
@@ -87,7 +106,7 @@ watch(() => props.post, () => {
         word-wrap: break-word;
     }
 
-    &:first-of-type {
+    &:nth-of-type(1) {
         i {
             transform: rotate(180deg);
         }
@@ -97,7 +116,7 @@ watch(() => props.post, () => {
         }
     }
 
-    &:last-of-type {
+    &:nth-of-type(2) {
         span {
             text-align: left;
         }

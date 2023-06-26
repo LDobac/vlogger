@@ -32,9 +32,10 @@ const series = toRef(props.series);
         font-weight: bold;
         color: var(--primary-color);
         text-decoration: none;
+        cursor: pointer;
 
         &:hover {
-            color: black;
+            color: var(--series-primary-color);
         }
     }
 }
