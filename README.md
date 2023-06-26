@@ -1,39 +1,14 @@
 # vlogger
+꾸준히 글과 사이드 프로젝트를 해보고자 만든 블로그 프로젝트입니다.
 
-## Project setup
-```
-yarn install
-```
-
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
-
-### Compiles and minifies for production
-```
-yarn build
-```
-
-### Run your unit tests
-```
-yarn test:unit
-```
-
-### Run your end-to-end tests
-```
-yarn test:e2e
-```
-
-### Lints and fixes files
-```
-yarn lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
-
+markdown으로 내용을 작성하고 있으며, 여러 기능들을 계속 추가해볼 생각입니다.
 
 # TODO
-[] migrete yarn version 2
-[] update packages
+[x] migrete yarn version 2
+[x] update packages
+[] DO SEO with naver webmaster
+[] Find helpful setup GA and do SEO things
+[] Add reply features
+[] Considerate the perm link
+[] Write about page
+[] Change image format to webp
