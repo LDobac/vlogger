@@ -92,7 +92,7 @@ const selectedFilterName = computed(() => {
 
     font-size: 2rem;
     font-style: italic;
-    border-bottom: 1px solid var(--border-color);
+    border-bottom: 3px solid var(--border-color);
     color: white;
     margin-top: -3rem;
 
@@ -100,6 +100,11 @@ const selectedFilterName = computed(() => {
         font-size: 1rem;
         font-style: normal;
         margin-bottom: 0.5rem;
+    }
+
+    .name {
+        color: var(--series-primary-color);
+        font-weight: bold;
     }
 
     @include m-lg {
