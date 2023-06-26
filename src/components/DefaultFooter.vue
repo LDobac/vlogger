@@ -1,6 +1,6 @@
 <template>
     <footer class="footer">
-        Copyright 2021 by Jaehee All rights reserved.
+        Copyright 2023 by Jaehee All rights reserved.
     </footer>
 </template>
 
