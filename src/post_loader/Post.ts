@@ -71,6 +71,16 @@ export default class Post
         return dayjs(this.postMeta.date);
     }
 
+    public get lastEditDate() : Dayjs | null
+    {
+        if (this.postMeta.lastEditDate)
+        {
+            return dayjs(this.postMeta.lastEditDate);
+        }
+
+        return null;
+    }
+
     public get thumbnail() : string
     {
         return this.postMeta.thumbnail;

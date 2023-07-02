@@ -24,6 +24,7 @@ const formattedDate = computed(() => {
 
 <style lang="scss" scoped>
 .date {
+    display: inline;
     color: #000000ab;
 
     @include m-sm {

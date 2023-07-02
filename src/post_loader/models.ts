@@ -28,6 +28,7 @@ interface PostMetadata
     thumbnail : string;
     summary : string;
     date : string;
+    lastEditDate? : string;
     series : number | null;
     tags : number[];
     originFile : string;

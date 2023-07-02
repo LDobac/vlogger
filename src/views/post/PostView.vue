@@ -11,9 +11,20 @@
                         {{post.title}}
                         <SeriesLink v-if="post.series" :series="post.series"/>
                     </h1>
-                    <FormattedDate 
-                        :date="post.date"
-                    />
+                    <div class="dates">
+                        <div class="write-date">
+                            <span>처음 작성일&nbsp;:&nbsp;</span>
+                            <FormattedDate 
+                                :date="post.date"
+                            />
+                        </div>
+                        <div class="last-edit-date" v-if="post.lastEditDate">
+                            <span>최근 수정일&nbsp;:&nbsp;</span>
+                            <FormattedDate 
+                                :date="post.lastEditDate"
+                            />
+                        </div>
+                    </div>
                 </div>
                 <article 
                     class="markdown-body" 
@@ -103,7 +114,7 @@ LoadPost(parseInt(route.params.id as string));
     .content {
         .title-wrap {
             border-bottom: 1px solid black;
-            padding-bottom: 2rem;
+            padding-bottom: 1.5rem;
 
             .title {
                 font-size: 3rem;
@@ -120,6 +131,18 @@ LoadPost(parseInt(route.params.id as string));
             .tags {
                 padding-bottom: 1rem;
             }
+
+            .dates {
+                color: #000000ab;
+
+                .write-date {
+                    margin-bottom: 0.5rem;
+                }
+
+                @include m-sm {
+                    font-size: 0.9rem;
+                }
+            }
         }
 
         @include m-sm {
@@ -131,7 +154,7 @@ LoadPost(parseInt(route.params.id as string));
 
 article {
     font-family: inherit !important;
-    padding-top: 3rem;
+    padding-top: 2rem;
 
     img {
         max-width: 100%;

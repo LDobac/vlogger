@@ -110,6 +110,10 @@ class MDBuilder
         postData.summary = parsedMetadata.summary ?? "";
         postData.thumbnail = parsedMetadata.thumbnail ?? "";
         postData.date = dayjs(parsedMetadata.date).tz(process.env.TZ).toISOString() ?? dayjs().tz(process.env.TZ).toISOString();
+        postData.lastEditDate = parsedMetadata.lastEditDate ? ( 
+                            dayjs(parsedMetadata.lastEditDate).tz(process.env.TZ).toISOString() ??
+                            dayjs().tz(process.env.TZ).toISOString()
+                        ) : undefined;
         postData.seriesName = parsedMetadata.series ?? "";
         postData.tags = parsedMetadata.tags ?? [];
 

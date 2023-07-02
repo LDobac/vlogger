@@ -380,6 +380,7 @@ class MDPoster
             summary : mdPostData.summary,
             thumbnail : mdPostData.thumbnail,
             date : mdPostData.date,
+            lastEditDate: mdPostData.lastEditDate,
             series : seriesId,
             tags : tagIds,
             originFile : originFile,
@@ -473,6 +474,7 @@ class MDPoster
         curPostMeta.summary = mdPostData.summary;
         curPostMeta.thumbnail = mdPostData.thumbnail;
         curPostMeta.date = mdPostData.date;
+        curPostMeta.lastEditDate = mdPostData.lastEditDate,
         curPostMeta.mtime = mtime;
     }
 
