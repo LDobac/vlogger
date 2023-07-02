@@ -48,10 +48,8 @@ const props = defineProps<{post: Post}>();
         min-width: unset;
         max-width: unset;
 
-        width: 40%;
-        font-size: 1.1rem;
-
-        padding: 8px 0;
+        width: auto;
+        font-size: 1.25rem;
     }
 }
 </style>

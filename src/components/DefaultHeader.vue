@@ -55,6 +55,11 @@
         object-fit: cover;
         border-radius: 100%;
     }
+
+    @include m-sm {
+        width: 24vw;
+        height: 24vw;
+    }
 }
 
 .title { 

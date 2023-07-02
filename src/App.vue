@@ -51,8 +51,8 @@ body {
     }
 
     @include m-sm {
-        grid-template-columns: 10px minmax(0, 1fr) 10px;
-        grid-template-rows: auto minmax(40px, auto) auto 40px 64px;
+        grid-template-columns: 5px minmax(0, 1fr) 5px;
+        grid-template-rows: auto minmax(24px, auto) auto 40px 64px;
     }
 }
 </style>

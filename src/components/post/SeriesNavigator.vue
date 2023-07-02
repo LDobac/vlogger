@@ -17,7 +17,7 @@
                 <i>&#10140;</i>
                 <span>{{prevPost.title}}</span>
             </SeriesNavigatorButton>
-            <div v-else></div>
+            <a class="dummy navigator-button" v-else></a>
 
             <SeriesNavigatorButton
                 v-if="nextPost"
@@ -27,7 +27,7 @@
                 <span>{{nextPost.title}}</span>
                 <i>&#10140;</i>
             </SeriesNavigatorButton>
-            <div v-else></div>
+            <a class="dummy navigator-button" v-else></a>
         </div>
     </div>
 </template>
@@ -89,6 +89,10 @@ watch(() => props.post, () => {
 .link {
     display: flex;
     justify-content: space-between;
+
+    @include m-sm {
+        flex-direction: column;
+    }
 }
 
 .navigator-button {
@@ -113,6 +117,10 @@ watch(() => props.post, () => {
 
         span {
             text-align: right;
+        }
+
+        @include m-sm {
+            margin-bottom: 1rem;
         }
     }
 

@@ -13,5 +13,7 @@ markdown으로 내용을 작성하고 있으며, 여러 기능들을 계속 추�
 [] Considerate the perm link
 [] Write about page
 [x] Change image format to webp
-[] Edit profile size and left,right margin, series navigator in mobile view
+[x] Edit profile size and left,right margin, series navigator in mobile view
 [] Add Last edit date in post
+[] Loading icon when post on load
+[] Lazy loading for image
