@@ -4,7 +4,7 @@
             <p>곧 주인장에 대한 설명과 이력 등등이 추가될 예정입니다.</p>
             <br>
             <p>추가될 때 까지 귀여운 고양이를 드립니다.</p>
-            <img src="@/assets/images/귀여운_고양이_2.jpg">
+            <img src="@/assets/images/귀여운_고양이.webp">
         </div>
     </div>
 </template>

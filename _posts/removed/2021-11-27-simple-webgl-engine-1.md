@@ -39,7 +39,7 @@ tags : ["과제", "webgl", "dev log"]
 
 ### 게임 엔진 - 전체적인 클래스 구조
 
-![plain game engine class diagram](./assets/images/simple-webgl-engine/game-source-code-simple.png)
+![plain game engine class diagram](./assets/images/simple-webgl-engine/game-source-code-simple.webp)
 
 간단하게 작성한 전체적인 게임 엔진 내 소스 구조입니다.
 

@@ -6,9 +6,12 @@ markdown으로 내용을 작성하고 있으며, 여러 기능들을 계속 추�
 # TODO
 [x] migrete yarn version 2
 [x] update packages
+[] Add meta tags(like OpenGraph)
 [] DO SEO with naver webmaster
 [] Find helpful setup GA and do SEO things
 [] Add reply features
 [] Considerate the perm link
 [] Write about page
-[] Change image format to webp
+[x] Change image format to webp
+[] Edit profile size and left,right margin, series navigator in mobile view
+[] Add Last edit date in post
