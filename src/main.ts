@@ -5,6 +5,7 @@ import VueGtag from "vue-gtag";
 import PostLoader from "./post_loader/PostLoader";
 import "dayjs/locale/ko";
 import dayjs from "dayjs";
+import { createMetaManager } from "vue-meta";
 
 dayjs.locale("ko");
 
@@ -15,11 +16,15 @@ postLoader.LoadMetadatas().then(() => {
     app.config.globalProperties.$postLoader = postLoader;
     
     app.use(router);
+
     app.use(VueGtag, {
         config : {
             id : "G-BLG37NTK4J",
         }
     }, router);
+
+    const metaManager = createMetaManager();
+    app.use(metaManager);
 
     app.mount("#app");
 });

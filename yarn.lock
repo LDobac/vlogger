@@ -11931,6 +11931,7 @@ __metadata:
     vue: ^3.3.4
     vue-gtag: ^2.0.1
     vue-jest: ^5.0.0-alpha.10
+    vue-meta: alpha
     vue-router: ^4.2.2
     yaml: ^2.3.1
   languageName: unknown
@@ -12010,6 +12011,15 @@ __metadata:
     vue:
       optional: true
   checksum: 54ea380e63bf9bf3e0a6229023f26aa7be934dc3ef424c455906f3047a9fd890c1ac60a61e72a7db9a2274712e6958bdaad123b9235fec003681990e71610db7
+  languageName: node
+  linkType: hard
+
+"vue-meta@npm:alpha":
+  version: 3.0.0-alpha.10
+  resolution: "vue-meta@npm:3.0.0-alpha.10"
+  peerDependencies:
+    vue: ^3.0.0
+  checksum: 18dc53c6e27fdd7450267412385b36e663f9f546646f19271d10dd3bfbec0002bd4bb9213ead43d80c2ce576720c4c17e69fc8eb48e4723257133c692c290af2
   languageName: node
   linkType: hard
 

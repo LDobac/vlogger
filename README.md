@@ -17,3 +17,4 @@ markdown으로 내용을 작성하고 있으며, 여러 기능들을 계속 추�
 [x] Add Last edit date in post
 [] Loading icon when post on load
 [] Lazy loading for image
+[] Post summery(description) generation and Add thumbnails
