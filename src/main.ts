@@ -6,8 +6,20 @@ import PostLoader from "./post_loader/PostLoader";
 import "dayjs/locale/ko";
 import dayjs from "dayjs";
 import { createMetaManager } from "vue-meta";
+import eruda from "eruda";
 
 dayjs.locale("ko");
+
+if (process.env.NODE_ENV !== "production")
+{
+    const el = document.createElement("div");
+    document.body.appendChild(el);
+    
+    eruda.init({
+        container: el,
+        tool: ["console", "elements"]
+    });
+}
 
 const postLoader = new PostLoader();
 postLoader.LoadMetadatas().then(() => {
