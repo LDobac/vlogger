@@ -27,14 +27,20 @@ postLoader.LoadMetadatas().then(() => {
     // TODO : Provide/Inject 방식으로 변경
     app.config.globalProperties.$postLoader = postLoader;
     
+    // Enable Vue Router
     app.use(router);
 
-    app.use(VueGtag, {
-        config : {
-            id : "G-BLG37NTK4J",
-        }
-    }, router);
+    // Enable GA
+    if (process.env.NODE_ENV === "production")
+    {
+        app.use(VueGtag, {
+            config : {
+                id : "G-BLG37NTK4J",
+            }
+        }, router);
+    }
 
+    // Enable meta tag
     const metaManager = createMetaManager();
     app.use(metaManager);
 
