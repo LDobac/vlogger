@@ -373,6 +373,8 @@ class MDPoster
             }
         );
 
+        const slug = mdPostData.slug.length ? mdPostData.slug : mdPostData.title;
+
         // Set post metadata
         this.postsMeta.push({
             uid : newPostId,
@@ -381,6 +383,7 @@ class MDPoster
             thumbnail : mdPostData.thumbnail,
             date : mdPostData.date,
             lastEditDate: mdPostData.lastEditDate,
+            slug: slug, 
             series : seriesId,
             tags : tagIds,
             originFile : originFile,
@@ -469,12 +472,15 @@ class MDPoster
             }
         );
 
+        const slug = mdPostData.slug.length ? mdPostData.slug : mdPostData.title;
+
         // Modify post metadata
         curPostMeta.title = mdPostData.title;
         curPostMeta.summary = mdPostData.summary;
         curPostMeta.thumbnail = mdPostData.thumbnail;
         curPostMeta.date = mdPostData.date;
-        curPostMeta.lastEditDate = mdPostData.lastEditDate,
+        curPostMeta.lastEditDate = mdPostData.lastEditDate;
+        curPostMeta.slug = slug;
         curPostMeta.mtime = mtime;
     }
 

@@ -114,6 +114,7 @@ class MDBuilder
                             dayjs(parsedMetadata.lastEditDate).tz(process.env.TZ).toISOString() ??
                             dayjs().tz(process.env.TZ).toISOString()
                         ) : undefined;
+        postData.slug = parsedMetadata.slug ?? "";
         postData.seriesName = parsedMetadata.series ?? "";
         postData.tags = parsedMetadata.tags ?? [];
 
