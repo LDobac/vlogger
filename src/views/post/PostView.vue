@@ -82,8 +82,16 @@ const postLoader = usePostLoader();
 const post = ref<Post | null>(null);
 const content = ref<string | undefined>("");
 
-const LoadPost = async (postId : number) => {
-    post.value = postLoader.GetPostById(postId);
+const LoadPost = async (postId : number | string) => {
+    if (typeof(postId) === "number")
+    {
+        post.value = postLoader.GetPostById(postId);
+    }
+    else if (typeof(postId) === "string")
+    {
+        post.value = postLoader.GetPostBySlug(postId);
+    }
+
     if (!post.value)
     {
         router.push({
@@ -96,20 +104,32 @@ const LoadPost = async (postId : number) => {
     content.value = await post.value.GetContent();
 };
 
-watch(() => route.params.id, (value) => {
-    if (value)
+// WTF
+const ParseIdOrSlug = (value : string) : number | string => {
+    // If route param has only numbers, it is post id
+    if (/^\d*$/.test(value))
     {
-        LoadPost(parseInt(route.params.id as string));
+        return parseInt(value);
     }
+    // Or not, it is just post slug
+    
+    return route.params.id.toString();
+};
+
+watch(() => route.params.id, (value) => {
+    if (!value) return;
+
+    const postId = ParseIdOrSlug(value.toString());
+
+    LoadPost(postId);
 });
 
-LoadPost(parseInt(route.params.id as string));
+LoadPost(ParseIdOrSlug(route.params.id.toString()));
 
 const metaTags = computed(() => {
     const postTitle = post.value?.title ? post.value.title : "Jaehee.dev";
     const postDesc = post.value?.summary ? post.value.summary : "개발하면서 발생한 혹은 개발과 관련된 이야기를 나누고자 합니다.";
     const postThumbnail = post.value?.thumbnail ? post.value.thumbnail : require("@/assets/images/profile_image.webp");
-    console.log(post.value);
 
     return {
         title: postTitle,

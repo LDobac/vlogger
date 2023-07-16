@@ -16,7 +16,7 @@ const routes: Array<RouteRecordRaw> = [
         component: AboutView
     },
     {
-        path: "/post/:id(\\d+)",
+        path: "/post/:id",
         name: "PostView",
         component: () => import(/* webpackChunkName: "post_view" */ "../views/post/PostView.vue"),
     },

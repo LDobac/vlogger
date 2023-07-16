@@ -81,6 +81,11 @@ export default class Post
         return null;
     }
 
+    public get slug() : string
+    {
+        return this.postMeta.slug;
+    }
+
     public get thumbnail() : string
     {
         return this.postMeta.thumbnail;

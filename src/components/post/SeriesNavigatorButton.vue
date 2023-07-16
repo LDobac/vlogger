@@ -4,7 +4,7 @@
         :to="{
             name : 'PostView', 
             params : {
-                id : props.post.uid
+                id : props.post.slug
             }
         }"
     >

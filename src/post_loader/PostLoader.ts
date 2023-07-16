@@ -103,4 +103,23 @@ export default class PostLoader
             return null;
         }
     }
+
+    public GetPostBySlug(slug : string) : Post | null
+    {
+        try
+        {
+            const postMeta = this.postMetadatas.find((v) => v.slug === slug);
+            if (!postMeta) throw new Error("Faild to find post metadata by slug");
+            
+            const post = new Post(postMeta.uid, this);
+
+            return post;
+        } 
+        catch (error) 
+        {
+            console.log(error);
+
+            return null;
+        }
+    }
 }

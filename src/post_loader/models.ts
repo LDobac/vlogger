@@ -29,6 +29,7 @@ interface PostMetadata
     summary : string;
     date : string;
     lastEditDate? : string;
+    slug: string;
     series : number | null;
     tags : number[];
     originFile : string;

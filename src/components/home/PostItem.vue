@@ -3,7 +3,7 @@
         :to="{
             name : 'PostView', 
             params : {
-                id : post.uid
+                id : post.slug
             }
         }"
     >
