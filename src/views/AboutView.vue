@@ -14,6 +14,8 @@ import { computed } from "vue";
 import { useMeta } from "vue-meta";
 import { useRouter } from "vue-router";
 
+import profileImageUrl from "@/assets/images/profile_image.webp";
+
 const router = useRouter();
 
 const metaTags = computed(() => {
@@ -25,9 +27,7 @@ const metaTags = computed(() => {
             title: "About Page",
             description: "Who am I?",
             url: router.currentRoute.value.fullPath,
-            image: [
-                require("@/assets/images/profile_image.webp")
-            ]
+            image: [profileImageUrl]
         },
     }; 
 });

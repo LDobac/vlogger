@@ -47,11 +47,9 @@ export default class Post
 
     public async GetContent() : Promise<string>
     {
-        const htmlFile = await import(
-            /* webpackChunkName: "post-[request]-[index]" */ 
-            /* webpackMode: "lazy" */
-            `@/assets/.build/build_posts/${this.postMeta.htmlFileName}`
-        );
+        const contentPath = this.postMeta.htmlFileName.replace(/\.[^\/.]+$/, "");
+        // In vite dynamic import, path must be have static extension
+        const htmlFile = await import(`@/assets/.build/build_posts/${contentPath}.json`);
 
         return htmlFile.content;
     }

@@ -14,11 +14,12 @@ if (process.env.NODE_ENV !== "production")
 {
     const el = document.createElement("div");
     document.body.appendChild(el);
-    
+
     eruda.init({
         container: el,
         tool: ["console", "elements"]
     });
+
 }
 
 const postLoader = new PostLoader();
@@ -31,7 +32,7 @@ postLoader.LoadMetadatas().then(() => {
     app.use(router);
 
     // Enable GA
-    if (process.env.NODE_ENV === "production")
+    if (import.meta.env.NODE_ENV === "production")
     {
         app.use(VueGtag, {
             config : {

@@ -25,6 +25,8 @@ import { PostList } from "@/components/home";
 import { usePostLoader } from "@/composable/PostLoader";
 import type { IPostFilter } from "@/post_loader/models";
 
+import profileImageUrl from "@/assets/images/profile_image.webp";
+
 const route = useRoute();
 
 const postFilter = ref<IPostFilter | null>(null);
@@ -81,9 +83,7 @@ const metaTags = computed(() => {
             title: "게시글 목록",
             description: "지금까지 작성된 게시글들을 목록을 몰 수 있습니다.",
             url: router.currentRoute.value.fullPath,
-            image: [
-                require("@/assets/images/profile_image.webp")
-            ]
+            image: [profileImageUrl]
         },
     }; 
 });

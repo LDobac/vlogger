@@ -42,7 +42,7 @@ interface IPostFilter
     id : number;
 }
 
-export {
+export type {
     Series,
     Tag,
     PostMetadata,

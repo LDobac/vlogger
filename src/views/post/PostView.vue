@@ -69,6 +69,8 @@ import Post from "@/post_loader/Post";
 import { usePostLoader } from "@/composable/PostLoader";
 import { useMeta } from "vue-meta";
 
+import profileImageUrl from "@/assets/images/profile_image.webp";
+
 // Set hightlight.js
 onMounted(() => {
     hljs.highlightAll();
@@ -129,7 +131,7 @@ LoadPost(ParseIdOrSlug(route.params.id.toString()));
 const metaTags = computed(() => {
     const postTitle = post.value?.title ? post.value.title : "Jaehee.dev";
     const postDesc = post.value?.summary ? post.value.summary : "개발하면서 발생한 혹은 개발과 관련된 이야기를 나누고자 합니다.";
-    const postThumbnail = post.value?.thumbnail ? post.value.thumbnail : require("@/assets/images/profile_image.webp");
+    const postThumbnail = post.value?.thumbnail ? post.value.thumbnail : profileImageUrl;
 
     return {
         title: postTitle,

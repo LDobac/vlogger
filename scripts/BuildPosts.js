@@ -67,7 +67,8 @@ async function Run()
 
     // Chagne result html file to json format
     const rawPostMeta = await fs.readFile(path.resolve(DEST_PATH, MDPoster.POSTS_METADATA_FILE));
-    const publicPath = require("../vue.config").publicPath;
+    // If blog is under some path, it need to change publicPath 
+    const publicPath = "/";
 
     const postsMeta = JSON.parse(rawPostMeta);
     for (const post of postsMeta) 

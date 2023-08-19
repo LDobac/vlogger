@@ -18,7 +18,7 @@ const routes: Array<RouteRecordRaw> = [
     {
         path: "/post/:id",
         name: "PostView",
-        component: () => import(/* webpackChunkName: "post_view" */ "../views/post/PostView.vue"),
+        component: () => import("../views/post/PostView.vue"),
     },
     {
         path: "/:pathMatch(.*)*",
@@ -33,9 +33,9 @@ const routes: Array<RouteRecordRaw> = [
 ];
 
 const router = createRouter({
-    history: createWebHashHistory(process.env.BASE_URL),
+    history: createWebHashHistory(import.meta.env.BASE_URL),
     routes,
-    scrollBehavior(to, from, savedPosition) {
+    scrollBehavior(to, _, savedPosition) {
         if (savedPosition) 
         {
             return savedPosition;

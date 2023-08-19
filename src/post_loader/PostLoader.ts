@@ -20,9 +20,9 @@ export default class PostLoader
 
     public async LoadMetadatas() : Promise<void>
     {
-        this._postMetadatas = (await import(/* webpackChunkName: "post_metadata" */ "@/assets/.build/post.json")).default;
-        this._seriesMetadata = (await import(/* webpackChunkName: "series_metadata" */ "@/assets/.build/series.json")).default;
-        this._tagsMetadata = (await import(/* webpackChunkName: "tags_metadata" */ "@/assets/.build/tags.json")).default;
+        this._postMetadatas = (await import("@/assets/.build/post.json")).default;
+        this._seriesMetadata = (await import("@/assets/.build/series.json")).default;
+        this._tagsMetadata = (await import("@/assets/.build/tags.json")).default;
         
         console.log("Loaded Post metadata : ", this._postMetadatas);
         console.log("Loaded Series metadata : ", this._seriesMetadata);
