@@ -5,7 +5,6 @@ import VueGtag from "vue-gtag";
 import PostLoader from "./post_loader/PostLoader";
 import "dayjs/locale/ko";
 import dayjs from "dayjs";
-import { createMetaManager } from "vue-meta";
 
 dayjs.locale("ko");
 
@@ -30,10 +29,6 @@ export async function createApp()
             }
         }, router);
     }
-
-    // Enable meta tag
-    const metaManager = createMetaManager();
-    app.use(metaManager);
 
     return { app, router };
 }

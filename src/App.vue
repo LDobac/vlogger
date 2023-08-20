@@ -1,5 +1,4 @@
 <template>
-    <metainfo></metainfo>
     <DefaultHeader />
     <router-view/>
     <DefaultFooter />

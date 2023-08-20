@@ -24,10 +24,6 @@ export default class PostLoader
         this._seriesMetadata = (await import("@/assets/.build/series.json")).default;
         this._tagsMetadata = (await import("@/assets/.build/tags.json")).default;
         
-        console.log("Loaded Post metadata : ", this._postMetadatas);
-        console.log("Loaded Series metadata : ", this._seriesMetadata);
-        console.log("Loaded Tags metadata : ", this._tagsMetadata);
-
         this.dataHasLoaded = true;
     }
 

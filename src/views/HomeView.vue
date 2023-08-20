@@ -18,14 +18,11 @@
 
 <script setup lang="ts">
 import { computed, ref, watch } from "vue";
-import { LocationQuery, useRoute, useRouter } from "vue-router";
-import { useMeta } from "vue-meta";
+import { LocationQuery, useRoute } from "vue-router";
 
 import { PostList } from "@/components/home";
 import { usePostLoader } from "@/composable/PostLoader";
 import type { IPostFilter } from "@/post_loader/models";
-
-import profileImageUrl from "@/assets/images/profile_image.webp";
 
 const route = useRoute();
 
@@ -72,22 +69,6 @@ const selectedFilterName = computed(() => {
 
     return "";
 });
-
-const router = useRouter();
-
-const metaTags = computed(() => {
-    return {
-        title: router.currentRoute.value.name ?? "Jaehee.dev",
-        description: "개발하면서 발생한 혹은 개발과 관련된 이야기를 나누고자 합니다.",
-        og: {
-            title: "게시글 목록",
-            description: "지금까지 작성된 게시글들을 목록을 몰 수 있습니다.",
-            url: router.currentRoute.value.fullPath,
-            image: [profileImageUrl]
-        },
-    }; 
-});
-useMeta(metaTags);
 </script>
 
 <style lang="scss" scoped>

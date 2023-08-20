@@ -55,7 +55,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted, ref, watch } from "vue";
+import { onMounted, ref, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
 
 import "highlight.js/styles/base16/google-light.css";
@@ -69,9 +69,6 @@ import SeriesLink from "@/components/post/SeriesLink.vue";
 import SeriesNavigator from "@/components/post/SeriesNavigator.vue";
 import Post from "@/post_loader/Post";
 import { usePostLoader } from "@/composable/PostLoader";
-import { useMeta } from "vue-meta";
-
-import profileImageUrl from "@/assets/images/profile_image.webp";
 
 // Set hightlight.js
 onMounted(() => {
@@ -129,27 +126,6 @@ watch(() => route.params.id, (value) => {
 });
 
 LoadPost(ParseIdOrSlug(route.params.id.toString()));
-
-const metaTags = computed(() => {
-    const postTitle = post.value?.title ? post.value.title : "Jaehee.dev";
-    const postDesc = post.value?.summary ? post.value.summary : "개발하면서 발생한 혹은 개발과 관련된 이야기를 나누고자 합니다.";
-    const postThumbnail = post.value?.thumbnail ? post.value.thumbnail : profileImageUrl;
-
-    return {
-        title: postTitle,
-        description: postDesc,
-        og: {
-            title: postTitle,
-            description: postDesc,
-            url: router.currentRoute.value.fullPath,
-            image: [
-                postThumbnail
-            ],
-            type: "website"
-        },
-    }; 
-});
-useMeta(metaTags);
 </script>
 
 <style lang="scss">

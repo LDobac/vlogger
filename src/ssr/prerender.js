@@ -21,6 +21,7 @@ const routesToPrerender = fs
   .readdirSync(toAbsolute('../../src/views'))
   .map((file) => {
     const name = file.replace(/\.vue$/, '').toLowerCase()
+    console.log(file)
     return name === 'home' ? `/` : `/${name}`
   })
 
@@ -39,5 +40,5 @@ const routesToPrerender = fs
   }
 
   // done, delete ssr manifest
-  fs.unlinkSync(toAbsolute('../../ssg/static/ssr-manifest.json'))
+  // fs.unlinkSync(toAbsolute('../../ssg/static/ssr-manifest.json'))
 })()
