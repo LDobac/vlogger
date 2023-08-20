@@ -39,7 +39,8 @@
 import type Post from "@/post_loader/Post";
 
 import { FormattedDate } from "@/components";
-import { TagsView, SeriesLink } from "@/components/post";
+import TagsView from "@/components/post/TagsView.vue";
+import SeriesLink from "@/components/post/SeriesLink.vue";
 import { toRef } from "vue";
 
 const props = defineProps<{post: Post}>();

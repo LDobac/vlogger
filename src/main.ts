@@ -6,45 +6,34 @@ import PostLoader from "./post_loader/PostLoader";
 import "dayjs/locale/ko";
 import dayjs from "dayjs";
 import { createMetaManager } from "vue-meta";
-import eruda from "eruda";
 
 dayjs.locale("ko");
 
-if (process.env.NODE_ENV !== "production")
+const postLoader = new PostLoader();
+await postLoader.LoadMetadatas();
+
+const app = createApp(App);
+// TODO : Provide/Inject 방식으로 변경
+app.config.globalProperties.$postLoader = postLoader;
+    
+// Enable Vue Router
+app.use(router);
+
+// Enable GA
+if (import.meta.env.NODE_ENV === "production")
 {
-    const el = document.createElement("div");
-    document.body.appendChild(el);
-
-    eruda.init({
-        container: el,
-        tool: ["console", "elements"]
-    });
-
+    app.use(VueGtag, {
+        config : {
+            id : "G-BLG37NTK4J",
+        }
+    }, router);
 }
 
-const postLoader = new PostLoader();
-postLoader.LoadMetadatas().then(() => {
-    const app = createApp(App);
-    // TODO : Provide/Inject 방식으로 변경
-    app.config.globalProperties.$postLoader = postLoader;
-    
-    // Enable Vue Router
-    app.use(router);
+// Enable meta tag
+const metaManager = createMetaManager();
+app.use(metaManager);
 
-    // Enable GA
-    if (import.meta.env.NODE_ENV === "production")
-    {
-        app.use(VueGtag, {
-            config : {
-                id : "G-BLG37NTK4J",
-            }
-        }, router);
-    }
+app.mount("#app");
 
-    // Enable meta tag
-    const metaManager = createMetaManager();
-    app.use(metaManager);
-
-    app.mount("#app");
-});
+export { app, router };
 

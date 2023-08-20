@@ -64,7 +64,9 @@ import hljs from "highlight.js/lib/common";
 import "github-markdown-css";
 
 import { FormattedDate } from "@/components";
-import { TagsView, SeriesLink, SeriesNavigator } from "@/components/post";
+import TagsView from "@/components/post/TagsView.vue";
+import SeriesLink from "@/components/post/SeriesLink.vue";
+import SeriesNavigator from "@/components/post/SeriesNavigator.vue";
 import Post from "@/post_loader/Post";
 import { usePostLoader } from "@/composable/PostLoader";
 import { useMeta } from "vue-meta";

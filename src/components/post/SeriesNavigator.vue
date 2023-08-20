@@ -35,7 +35,8 @@
 <script setup lang="ts">
 import { ref, watch } from "vue";
 import { usePostLoader } from "@/composable/PostLoader";
-import { SeriesLink, SeriesNavigatorButton } from ".";
+import SeriesLink from "./SeriesLink.vue";
+import SeriesNavigatorButton from "./SeriesNavigatorButton.vue";
 import type Post from "@/post_loader/Post";
 import type { Series } from "@/post_loader/models";
 

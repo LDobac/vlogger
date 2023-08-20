@@ -59,3 +59,5 @@ pnpm-debug.log*
 # .pnp.*
 
 # End of https://www.toptal.com/developers/gitignore/api/yarn
+
+/ssg
