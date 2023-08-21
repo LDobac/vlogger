@@ -4,6 +4,7 @@
 import fs from 'node:fs'
 import path from 'node:path'
 import url from 'node:url'
+import postMeta from "../assets/.build/post.json" assert {type: "json"};
 
 const __dirname = path.dirname(url.fileURLToPath(import.meta.url))
 
@@ -16,14 +17,16 @@ const template = fs.readFileSync(toAbsolute('../../ssg/static/index.html'), 'utf
 // eslint-disable-next-line
 const { render } = await import('../../ssg/server/entry-server.js')
 
-// determine routes to pre-render from src/pages
-const routesToPrerender = fs
-  .readdirSync(toAbsolute('../../src/views'))
-  .map((file) => {
-    const name = file.replace(/\.vue$/, '').toLowerCase()
-    console.log(file)
-    return name === 'home' ? `/` : `/${name}`
-  })
+const routesToPrerender = [
+    "/", "/about",
+    ...postMeta.map((v) => `/post/${v.slug}`)
+];
+console.log(routesToPrerender);
+
+if (!fs.existsSync(toAbsolute("../../ssg/static/post")))
+{
+  fs.mkdirSync(toAbsolute("../../ssg/static/post"), {recursive: true});
+}
 
 ;(async () => {
   // pre-render each route...
@@ -35,8 +38,8 @@ const routesToPrerender = fs
       .replace(`<!--app-html-->`, appHtml)
 
     const filePath = `../../ssg/static${url === '/' ? '/index' : url}.html`
-    fs.writeFileSync(toAbsolute(filePath), html)
     console.log('pre-rendered:', filePath)
+    fs.writeFileSync(toAbsolute(filePath), html )
   }
 
   // done, delete ssr manifest
