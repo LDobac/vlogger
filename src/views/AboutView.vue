@@ -10,28 +10,6 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from "vue";
-import { useMeta } from "vue-meta";
-import { useRouter } from "vue-router";
-
-import profileImageUrl from "@/assets/images/profile_image.webp";
-
-const router = useRouter();
-
-const metaTags = computed(() => {
-    // TODO: Write about page
-    return {
-        title: "Jaehee.dev",
-        description: "개발하면서 발생한 혹은 개발과 관련된 이야기를 나누고자 합니다.",
-        og: {
-            title: "About Page",
-            description: "Who am I?",
-            url: router.currentRoute.value.fullPath,
-            image: [profileImageUrl]
-        },
-    }; 
-});
-useMeta(metaTags);
 </script>
 
 <style lang="scss" scoped>

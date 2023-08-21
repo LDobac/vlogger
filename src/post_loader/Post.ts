@@ -47,6 +47,7 @@ export default class Post
 
     public async GetContent() : Promise<string>
     {
+        // eslint-disable-next-line
         const contentPath = this.postMeta.htmlFileName.replace(/\.[^\/.]+$/, "");
         // In vite dynamic import, path must be have static extension
         const htmlFile = await import(`@/assets/.build/build_posts/${contentPath}.json`);
