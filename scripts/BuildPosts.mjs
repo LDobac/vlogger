@@ -1,9 +1,9 @@
-const fs = require("fs/promises");
-const fse = require("fs-extra");
-const path = require("path");
-const process = require("process");
-const replaceExt = require("replace-ext");
-const { MDPoster } = require("../md_poster/MDPoster");
+import fs from "fs/promises";
+import fse from "fs-extra";
+import path from "path";
+import process from "process";
+import replaceExt from "replace-ext";
+import { MDPoster } from "../md_poster/MDPoster.cjs";
 
 const POSTS_DIRECTORY_PATH = "_posts";
 const DEST_PATH = "src/assets/.build";

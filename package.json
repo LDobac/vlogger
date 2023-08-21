@@ -6,7 +6,7 @@
     "dev": "vite",
     "build": "vue-tsc && vite build",
     "serve": "vite preview",
-    "posts": "node ./scripts/BuildPosts.js",
+    "posts": "node ./scripts/BuildPosts.mjs",
     "lint": "eslint --ext .js,.ts,.vue --ignore-path .gitignore --fix src",
     "deploy": "gh-pages -d dist"
   },
