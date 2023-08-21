@@ -2,8 +2,8 @@ const fs = require("fs/promises");
 const path = require("path");
 const dayjs = require("dayjs");
 const replaceExt = require("replace-ext");
-const { MDBuilder } = require("./MDBuilder");
-const { MDNotValidData } = require("./MDExceptions");
+const { MDBuilder } = require("./MDBuilder.cjs");
+const { MDNotValidData } = require("./MDExceptions.cjs");
 
 /**
  * MDPoster - It is generate posts data and metadatas from markdown documents.
@@ -373,7 +373,8 @@ class MDPoster
             }
         );
 
-        const slug = mdPostData.slug.length ? mdPostData.slug : mdPostData.title;
+        let slug = mdPostData.slug.length ? mdPostData.slug : mdPostData.title;
+        slug = slug.replace(/\s/gi, "-");
 
         // Set post metadata
         this.postsMeta.push({
@@ -472,7 +473,8 @@ class MDPoster
             }
         );
 
-        const slug = mdPostData.slug.length ? mdPostData.slug : mdPostData.title;
+        let slug = mdPostData.slug.length ? mdPostData.slug : mdPostData.title;
+        slug = slug.replace(/\s/gi, "-");
 
         // Modify post metadata
         curPostMeta.title = mdPostData.title;

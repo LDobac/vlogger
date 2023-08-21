@@ -9,7 +9,7 @@
     "build:server": "vite build --outDir ssg/server --ssr src/ssr/entry-server.js",
     "generate": "vite build --ssrManifest --outDir ssg/static && yarn build:server && node src/ssr/prerender.js",
     "serve": "vite preview",
-    "posts": "node ./scripts/BuildPosts.js",
+    "posts": "node ./scripts/BuildPosts.mjs",
     "lint": "eslint --ext .js,.ts,.vue --ignore-path .gitignore --fix src",
     "deploy": "gh-pages -d dist"
   },

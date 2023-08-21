@@ -3,7 +3,7 @@ const dayjs = require("dayjs");
 const dayjsTimezone = require("dayjs/plugin/timezone");
 const dayjsUTC = require("dayjs/plugin/utc");
 const YAML = require("yaml");
-const { MDNoMetadata } = require("./MDExceptions");
+const { MDNoMetadata } = require("./MDExceptions.cjs");
 
 dayjs.extend(dayjsTimezone);
 dayjs.extend(dayjsUTC);
