@@ -2,9 +2,13 @@ FROM node:20-alpine3.17 as builder
 
 WORKDIR /app
 
-COPY package.json ./
-COPY yarn.lock ./
+COPY package.json .
+COPY yarn.lock .
+COPY .yarnrc.yml .
+COPY .yarn .yarn
+RUN ls -al
 
+RUN yarn set version berry
 RUN yarn install
 
 COPY . .

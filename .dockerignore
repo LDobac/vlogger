@@ -1,0 +1,14 @@
+.git
+.github
+.vscode
+.yarn/*
+!.yarn/releases
+!.yarn/patches
+!.yarn/plugins
+!.yarn/sdks
+!.yarn/versions
+node_modules
+dist
+Dockerfile
+.dockerignore
+.gitignore
