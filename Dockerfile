@@ -14,6 +14,8 @@ RUN yarn install
 COPY . .
 
 ENV NODE_ENV=production
+ENV TZ="Asia/Seoul"
+
 RUN yarn posts
 RUN yarn build
 
