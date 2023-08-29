@@ -1621,13 +1621,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eruda@npm:^3.0.0":
-  version: 3.0.0
-  resolution: "eruda@npm:3.0.0"
-  checksum: ba4aaff82ef5b68548235692f3cc3df4c4b2c029d2852e85b36e8d10981e887fbcfbc9161831ac3bdb678d2f6a53986079b43798661fc19833228c875919d0e7
-  languageName: node
-  linkType: hard
-
 "esbuild@npm:^0.18.10":
   version: 0.18.20
   resolution: "esbuild@npm:0.18.20"
@@ -3992,7 +3985,6 @@ __metadata:
     "@vue/eslint-config-typescript": ^11.0.3
     "@vue/test-utils": ^2.3.2
     dayjs: ^1.11.8
-    eruda: ^3.0.0
     eslint: ^8.42.0
     eslint-plugin-vue: ^9.14.1
     fs-extra: ^11.1.1
@@ -4008,7 +4000,6 @@ __metadata:
     vue: ^3.3.4
     vue-gtag: ^2.0.1
     vue-jest: ^5.0.0-alpha.10
-    vue-meta: alpha
     vue-router: ^4.2.2
     vue-tsc: ^1.8.8
     yaml: ^2.3.1
@@ -4064,15 +4055,6 @@ __metadata:
     typescript:
       optional: true
   checksum: 88f7959ebff421dc0c489825b86497d13f1dfe9edcdf4090f6355c683a2264c9cc165fa9e804de63b0ab271d37ed1e5496caf30a9cd1f6d15f897695b206d9d6
-  languageName: node
-  linkType: hard
-
-"vue-meta@npm:alpha":
-  version: 3.0.0-alpha.10
-  resolution: "vue-meta@npm:3.0.0-alpha.10"
-  peerDependencies:
-    vue: ^3.0.0
-  checksum: 18dc53c6e27fdd7450267412385b36e663f9f546646f19271d10dd3bfbec0002bd4bb9213ead43d80c2ce576720c4c17e69fc8eb48e4723257133c692c290af2
   languageName: node
   linkType: hard
 
