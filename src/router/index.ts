@@ -1,4 +1,4 @@
-import { createRouter, createWebHashHistory, RouteRecordRaw } from "vue-router";
+import { createRouter, createWebHashHistory, createWebHistory, RouteRecordRaw } from "vue-router";
 
 import HomeView from "../views/HomeView.vue";
 import AboutView from "../views/AboutView.vue";
@@ -33,7 +33,7 @@ const routes: Array<RouteRecordRaw> = [
 ];
 
 const router = createRouter({
-    history: createWebHashHistory(import.meta.env.BASE_URL),
+    history: import.meta.env.PROD ? createWebHistory(import.meta.env.BASE_URL) : createWebHashHistory(import.meta.env.BASE_URL),
     routes,
     scrollBehavior(to, _, savedPosition) {
         if (savedPosition) 
