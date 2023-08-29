@@ -20,7 +20,7 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
 
-    "baseurl": ".",
+    "baseUrl": ".",
     "paths": {
         "@/*": ["./src/*"],
         "@scss/*" : [ "./src/assets/scss/*"]
