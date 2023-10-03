@@ -1,20 +1,49 @@
 # vlogger
-꾸준히 글과 사이드 프로젝트를 해보고자 만든 블로그 프로젝트입니다.
 
-markdown으로 내용을 작성하고 있으며, 여러 기능들을 계속 추가해볼 생각입니다.
+## 이사했습니다
 
-# TODO
-[x] migrete yarn version 2
-[x] update packages
-[] Add meta tags(like OpenGraph)
-[] DO SEO with naver webmaster
-[] Find helpful setup GA and do SEO things
-[] Add reply features
-[] Considerate the perm link
-[] Write about page
-[x] Change image format to webp
-[x] Edit profile size and left,right margin, series navigator in mobile view
-[x] Add Last edit date in post
-[] Loading icon when post on load
-[] Lazy loading for image
-[] Post summery(description) generation and Add thumbnails
+[Astrologger](https://github.com/LDobac/astrologger)
+
+## 왜?
+
+2021년 10월쯤에 시작했던 vuejs를 이용해 개인 블로그를 제작하는 프로젝트였습니다.
+
+vuepress, jekyll등 다양한 서비스도 있지만, 직접 만들어보자 해서 시작했었으나...
+
+본래 목적은 최소비용(호스팅 서버 없이 github pages이용), Serverless 컨셉을 가지려 했습니다.
+
+Vuejs는 기본적으로 SPA 웹 프레임워크이기에 SEO에는 그다지 좋지 않습니다.
+특히나 Vue router의 Web history mode를 사용하기 위해서는 별도의 웹 서버 설정이 필요하죠.
+
+하지만, Github Pages는 별도의 서버 설정이 불가능하기에 무조건 Web hash mode를 사용해야 합니다.
+즉, SEO에 매우 부정적인 영향을 끼치게 됩니다.
+
+그렇다면 "페이지를 렌더링해서 각 페이지별로 정적 페이지로 생성하면 되지 않을까?
+어차피동적 컨텐츠도 없는데"
+
+SSG(Static Site Generation)을 시도해보려고 Puppeteer, Vite-ssg 라이브러리로 시도를 해보았었습니다.
+근데 애초에 SSG 컨셉으로 짠것도 아니다보니 시행착오가 결국 그냥 착오로 이어지고 다른 방법을 몰색했습니다.
+
+SSG가 기본 기능으로 탑재된 프레임워크들의 특징은 기본적으로 MPA, SSR 렌더링을 지원하고
+Hydration을 거쳐 클라이언트로 렌더링 되는 것을 정적 파일로 생성하는 형태입니다.
+
+그래서 기존 프레임워크에 Nuxt를 끼얹으면 되지 않을까?
+
+음. 설명서를 읽어보니 migration하는 것보다 그냥 파일들을 옮기는게 빠를거 같았습니다.
+
+그런데 말입니다, 제가 입대해서 군대에 있지말입니다. 공부도 하는김에
+요즘 유행하는 프레임워크를 좀 봤습니다.
+
+Svelte, Astro 라는 프레임워크를 봤는데 Svelte는 원래 좀 알고 있기도 하고
+홍머병이 도져서 좀 유명한건 별로여서 그나마 좀 덜유명한 Astro를 골랐습니다.
+
+Astro는 기본적으로 컨셉 자체가 다른 웹 프레임워크랑 높은 호환성을 가지며
+기본적으로 SSG를 지원하는 제가 찾던 딱 그런 프레임워크가 아닐수가 없는거 아니겠습니까.
+
+그래서 TMI가 좀 길었는데 결론은 그냥 갈아 엎고 옮겼습니다.
+원래 개발하면서 삽질 좀 하고 그런거 아니겠습니까.
+
+개인적으로 맘에 듭니다
+많이 찾아봐 주세요
+
+굿
